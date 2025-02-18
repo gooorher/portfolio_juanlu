@@ -37,32 +37,32 @@ const SocialLink = styled.a`
 const socialLinks = [
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com',
+    url: 'https://www.linkedin.com/in/jgordilloh/',
     icon: '/linkedin.svg',
   },
   {
     name: 'GitHub',
-    url: 'https://github.com',
+    url: 'https://github.com/gooorher',
     icon: '/github.svg',
   },
   {
     name: 'Instagram',
-    url: 'https://instagram.com',
+    url: 'https://instagram.com/__jgordillo',
     icon: '/instagram.svg',
   },
   {
     name: 'Goodreads',
-    url: 'https://goodreads.com',
+    url: 'https://www.goodreads.com/user/show/175064061',
     icon: '/goodreads.svg',
   },
   {
     name: 'Strava',
-    url: 'https://strava.com',
+    url: 'https://www.strava.com/athletes/juaaanlu',
     icon: '/strava.svg',
   },
   {
     name: 'Spotify',
-    url: 'https://spotify.com',
+    url: 'https://open.spotify.com/user/juaaanlu?si=HN8w2YshRgSirCQthkWNLA',
     icon: '/spotify.svg',
   },
 ];
