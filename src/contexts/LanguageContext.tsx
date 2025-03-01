@@ -199,7 +199,7 @@ export const translations: TranslationType = {
     hero: {
       greeting: "Hi, I'm",
       role: 'I build things for the web.',
-      description: "I'm a software developer specializing in building exceptional digital experiences.",
+      description: "I'm a software developer specializing in building exceptional digital experiences 👨🏼‍💻",
     },
     about: {
       title: 'About Me',
@@ -277,7 +277,7 @@ export const translations: TranslationType = {
     },
     contact: {
       title: "What's Next?",
-      description: "I'm currently looking for new opportunities, and my inbox is always open. Whether you have a question or just want to say hi, I'll try my best to get back to you!",
+      description: "I'm currently looking for new opportunities, and my inbox is always open. Whether you have a question or just want to  🫡, I'll try my best to get back to you!",
       button: 'Get In Touch',
     },
     footer: {
