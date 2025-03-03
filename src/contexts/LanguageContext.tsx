@@ -3,27 +3,6 @@ import { createContext, useContext, useState, PropsWithChildren, ReactNode } fro
 type Language = 'es' | 'en';
 
 // Tipos específicos para cada tipo de datos traducible
-type TranslatableData = {
-  title: string;
-  description: string | string[];
-} | {
-  company: string;
-  title: string;
-  range: string;
-  responsibilities: string[];
-} | {
-  institution: string;
-  degree: string;
-  range: string;
-  details: string[];
-} | {
-  title: string;
-  description: string;
-  tech: string[];
-  github?: string;
-  external?: string;
-};
-
 type LanguageContextType = {
   language: Language;
   toggleLanguage: () => void;
