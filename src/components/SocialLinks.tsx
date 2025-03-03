@@ -37,7 +37,7 @@ const SocialLink = styled.a`
 const socialLinks = [
   {
     name: 'LinkedIn',
-    url: 'www.linkedin.com/in/jgordilloh',
+    url: 'https://linkedin.com/in/jgordilloh',
     icon: '/linkedin.svg',
   },
   {
