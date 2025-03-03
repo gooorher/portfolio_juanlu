@@ -76,7 +76,7 @@ const Contact = () => {
           <p>{t('contact.description')}</p>
 
           <StyledButton
-            href="mailto:tu.email@example.com"
+            href="mailto:juaaanlu@gmail.com"
             target="_blank"
             rel="noopener noreferrer"
           >
