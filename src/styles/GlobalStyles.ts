@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import { Theme } from './theme';
 
-const GlobalStyles = createGlobalStyle<{ theme: Theme }>`
+const GlobalStyles = createGlobalStyle<{ theme?: Theme }>`
   /* CSS Reset */
   *, *::before, *::after {
     box-sizing: border-box;
