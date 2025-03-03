@@ -43,7 +43,7 @@ const socialLinks = [
   {
     name: 'GitHub',
     url: 'https://github.com/gooorher',
-    icon: '/github.svg',
+    icon: '././github.svg',
   },
   {
     name: 'Instagram',
