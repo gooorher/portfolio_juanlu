@@ -36,7 +36,7 @@ const Footer = () => {
         <div>
           <span>{t('footer.designed')} </span>
           <a
-            href="https://github.com/goorher"
+            href="https://github.com/gooorher"
             target="_blank"
             rel="noopener noreferrer"
           >
