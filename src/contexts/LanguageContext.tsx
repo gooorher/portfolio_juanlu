@@ -95,12 +95,31 @@ export const translations: TranslationType = {
       experiences_data: [
         {
           company: 'EY - Santander',
-          title: 'Desarrollador Full Stack',
-          range: 'Septiembre 2024 - Presente',
+          title: 'Analista de Datos OFSAA',
+          range: 'Marzo 2025 - Presente',
           responsibilities: [
-            'Desarrollo de aplicaciones web utilizando Angular, Django y MySQL en el contexto de Stress Test',
-            'Responsabilidad plena y autónoma en el desarrollo, mantenimiento y mejora de las distintas aplicaciones',
-            'Colaboración con todo el equipo para crear interfaces intuitivas para el usuario',
+            'Soporte y mejoras para la plataforma OFSAA, centrándose en los módulos de Customer Screening y Transaction Filtering.',
+            'Participación en un proyecto internacional utilizando la metodología FTS, gestionando traspasos entre las regiones APAC, EUR y LATAM.',
+            'Trabajo como consultor para Santander a través de EY, proporcionando análisis de datos y soporte especializado.',
+            'Resolución de incidencias de aplicación y realización de análisis de datos para asegurar el cumplimiento y la fiabilidad del sistema.',
+            'Desarrollo y optimización de consultas SQL y gestión de procesos batch para el manejo de datos.',
+            'Comunicación efectiva de problemas técnicos y soluciones a clientes y colaboración con el equipo de DevOps para mejoras en integración y automatización.',
+          ],
+        },
+        {
+          company: 'EY - Santander',
+          title: 'Desarrollador Full Stack',
+          range: 'Junio 2024 - Marzo 2025',
+          responsibilities: [
+
+            'Prueba de estrés de riesgo de crédito incluida en EBA ST para Santander',
+            'Creé componentes reutilizables de Angular para manejar validaciones de formularios y entrada de datos en escenarios de pruebas de estrés.',
+            'Integré endpoints REST de Django con servicios de Angular para la recuperación y manipulación de datos.',
+            'Creé servicios para manejar la carga de archivos y el procesamiento de grandes conjuntos de datos.',
+            'Implementé funcionalidad de validación y limpieza de datos para conjuntos de datos de entrada.',
+            'Creé mecanismos dinámicos de filtrado y ordenación para tablas de datos grandes.',
+            'Optimicé el rendimiento de la aplicación implementando carga perezosa y paginación.',
+            'Reduje los tiempos de respuesta de la API mediante la optimización eficiente de consultas.',
           ],
         },
         {
@@ -110,6 +129,10 @@ export const translations: TranslationType = {
           responsibilities: [
             'Atención al cliente',
             'Responsabilidad en el cuadre de la caja de la sucursal',
+            'Arqueo de caja y gestión de efectivo',
+            'Gestión de operaciones bancarias diarias',
+            'Resolución de consultas y problemas de clientes',
+
           ],
         },
       ],
@@ -140,20 +163,18 @@ export const translations: TranslationType = {
       ],
     },
     projects: {
-      title: 'Algunos proyectos que he construido',
+      title: 'Algunos proyectos que he hecho',
       projects_data: [
         {
           title: 'Mapa de Crisis de Ucrania',
           description: 'Aplicación web Flask que extrae datos de tweets acerca del conflicto de una base de datos MongoDB y muestra dashboards interactivos con gráficos y mapas de interés.',
           tech: ['Flask', 'MongoDB', 'Docker', 'Python'],
-          github: 'https://github.com',
-          external: 'https://example.com',
+          github: 'https://github.com/gooorher/Ukraine-Crisis-Tweets-Analysis',
         },
         {
           title: 'Detección de ataques de ciberseguridad usando técnicas de ML',
           description: 'Generación de CSVs provinientes de capturas de tráfico de red, preprocesamiento de datos y entrenamiento de modelos de machine learning para detectar ataques de seguridad. Se automatizó el proceso de entrenamiento y evaluación de modelos usando un workflow MLOps.',
           tech: ['Python', 'Scikit-learn', 'Pandas', 'Numpy', 'Docker', 'MLflow'],
-          github: 'https://github.com',
         },
       ],
     },
@@ -192,12 +213,30 @@ export const translations: TranslationType = {
       experiences_data: [
         {
           company: 'EY - Santander',
-          title: 'Full Stack Developer',
-          range: 'September 2024 - Present',
+          title: 'OFSAA Data Analyst',
+          range: 'March 2024 - Present',
           responsibilities: [
-            'Web application development using Angular, Django, and MySQL in the context of Stress Test',
-            'Full and autonomous responsibility in the development, maintenance, and improvement of various applications',
-            'Collaboration with the entire team to create intuitive user interfaces',
+            'Supported and improved the OFSAA platform, focusing on Customer Screening and Transaction Filtering modules.',
+            'Participated in an international project utilizing FTS methodology, managing handovers across APAC, EUR, and LATAM regions.',
+            'Worked as a consultant for Santander via EY, providing specialized data analysis and support.',
+            'Resolved application incidents and performed data analysis to ensure compliance and system reliability.',
+            'Developed and optimized SQL queries and managed batch processes for data handling.',
+            'Communicated technical issues and solutions effectively to clients and collaborated with the DevOps team for integration and automation enhancements.',
+          ],
+        },
+        {
+          company: 'EY - Santander',
+          title: 'Full Stack Developer',
+          range: 'June 2024 - March 2024',
+          responsibilities: [
+            'Credit Risk Stress Test included in EBA ST for Santander',
+            'Created reusable Angular components for handling form validations and data input in stress test scenarios.',
+            'Integrated Django REST endpoints with Angular services for data retrieval and manipulation.',
+            'Created services for handling file uploads and processing large datasets.',
+            'Implemented data validation and cleansing functionality for input datasets.',
+            'Created dynamic filtering and sorting mechanisms for large data tables.',
+            'Optimized application performance by implementing lazy loading and pagination.',
+            'Reduced API response times through efficient query optimization.'
           ],
         },
         {
@@ -207,6 +246,9 @@ export const translations: TranslationType = {
           responsibilities: [
             'Customer service',
             'Responsibility for balancing the branch\'s cash register',
+            'Cash count and cash management',
+            'Management of daily banking operations',
+            'Resolution of customer inquiries and issues',
           ],
         },
       ],

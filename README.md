@@ -1,50 +1,70 @@
-# React + TypeScript + Vite
+# Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the repository for Juanlu's personal portfolio. A website designed to showcase my projects, work experience, education, and skills.
 
-Currently, two official plugins are available:
+## Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This portfolio is a web application built with React and TypeScript, using Vite as the build tool. It is designed to be a professional and attractive presentation of my career path and capabilities as a software developer. The site is fully responsive and accessible, ensuring a good user experience on different devices.
 
-## Expanding the ESLint configuration
+## Structure and Organization
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+The project structure follows a logical organization to facilitate development and maintenance:
 
-- Configure the top-level `parserOptions` property like this:
+-   `public/`: Contains static assets such as images and the favicon. `screenshot.png` is located here.
+-   `src/`: Contains the application's source code.
+    -   `components/`: Reusable user interface components.
+    -   `contexts/`: React contexts for managing global states like theme and language.
+    -   `hooks/`: Custom React hooks.
+    -   `sections/`: Components representing the different sections of the page (Hero, About, Experience, Education, Projects, Contact).
+    -   `styles/`: Global style files and themes using Styled Components.
+    -   `data/`: Data files (although in this project most data is in the language context for translation).
+    -   `App.tsx`: Main application component.
+    -   `main.tsx`: Application entry point.
+-   `package.json`: Defines project dependencies and build/run scripts.
+-   `tsconfig.json`: TypeScript configuration.
+-   `vite.config.ts`: Vite configuration.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Key Features
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+-   **Responsive Design:** Adaptable to different screen sizes (desktop, tablet, mobile).
+-   **Light/Dark Mode:** Allows users to switch between a light and dark color theme for a better visual experience based on their preferences or environment.
+-   **Language Toggle:** Support for multiple languages (currently Spanish and English), allowing users to change the language of the site content.
+-   **Animations:** Use of `framer-motion` to add fluid and attractive animations.
+-   **Reusable Components:** Component-based structure for modular and efficient development.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Preview
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+You can see a screenshot of the portfolio here:
+
+![Portfolio Screenshot](public/screenshot.png)
+
+## Installation and Local Execution
+
+To clone and run this project locally, you will need to have Node.js and npm (or yarn) installed on your machine.
+
+1.  Clone the repository:
+    ```bash
+    git clone [Repository URL]
+    ```
+2.  Navegate to the project directory:
+    ```bash
+    cd portfolio
+    ```
+3.  Install dependencies:
+    ```bash
+    npm install
+    # or if you use yarn
+    # yarn install
+    ```
+4.  Start the development server:
+    ```bash
+    npm run dev
+    # or if you use yarn
+    # yarn dev
+    ```
+
+The application will run on `http://localhost:5173` (or a similar port).
+
+## Contact
+
+If you have any questions or want to get in touch, you can find my contact information in the Contact section of the portfolio or through the links in the footer.

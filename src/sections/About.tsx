@@ -107,6 +107,8 @@ const About = () => {
     'Node.js',
     'Angular',
     'MongoDB',
+    'SQL',
+    'HTML',
   ];
 
   const aboutText = t('about.description');
