@@ -75,6 +75,10 @@ const GlobalStyles = createGlobalStyle<{ theme?: Theme }>`
     transition: all 0.5s ease;
     min-width: 320px;
     max-width: 100vw;
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
 
     &.blur {
       overflow: hidden;
