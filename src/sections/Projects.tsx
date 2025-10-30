@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { motion, Variants } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { useLanguage } from '../contexts/LanguageContext';
+import styled from "styled-components";
+import { motion, Variants } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const StyledProjectsSection = styled.section`
   display: flex;
@@ -41,10 +41,14 @@ const StyledProjectInner = styled.div`
   align-items: flex-start;
   height: 100%;
   padding: 2rem 1.75rem;
-  border-radius: ${({ theme }) => theme.borderRadius};
-  background-color: var(--light-navy);
-  transition: var(--transition);
-  
+  border-radius: 16px;
+  background: var(--glassmorphism-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glassmorphism-border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+
   header {
     width: 100%;
     display: flex;
@@ -73,7 +77,7 @@ const StyledProjectInner = styled.div`
 
       a {
         padding: 5px 7px;
-        
+
         &.external {
           svg {
             width: 22px;
@@ -152,7 +156,7 @@ const Projects = () => {
     },
   };
 
-  const projects = t('projects.projects_data') as Array<{
+  const projects = t("projects.projects_data") as Array<{
     title: string;
     description: string;
     tech: string[];
@@ -167,14 +171,14 @@ const Projects = () => {
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         transition={{ duration: 0.5 }}
       >
-        {t('projects.title')}
+        {t("projects.title")}
       </motion.h2>
 
       <StyledGrid
         as={motion.div}
         variants={containerVariants}
         initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
+        animate={inView ? "visible" : "hidden"}
       >
         {projects.map((project, i) => (
           <StyledProjectCard key={i} variants={cardVariants}>
@@ -196,7 +200,11 @@ const Projects = () => {
                 </div>
                 <div className="project-links">
                   {project.github && (
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         role="img"

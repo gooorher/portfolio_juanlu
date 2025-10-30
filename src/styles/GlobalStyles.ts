@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import { Theme } from './theme';
+import { createGlobalStyle } from "styled-components";
+import { Theme } from "./theme";
 
 const GlobalStyles = createGlobalStyle<{ theme?: Theme }>`
   /* CSS Reset */
@@ -12,6 +12,10 @@ const GlobalStyles = createGlobalStyle<{ theme?: Theme }>`
   /* Custom Properties */
   :root {
     --background: ${({ theme }) => theme.colors.background};
+    --background-gradient: ${({ theme }) => theme.colors.backgroundGradient};
+    --glassmorphism-bg: ${({ theme }) => theme.colors.glassmorphism.background};
+    --glassmorphism-border: ${({ theme }) => theme.colors.glassmorphism.border};
+    --glassmorphism-blur: ${({ theme }) => theme.colors.glassmorphism.blur};
     --light-navy: ${({ theme }) => theme.colors.lightNavy};
     --lightest-navy: ${({ theme }) => theme.colors.lightestNavy};
     --slate: ${({ theme }) => theme.colors.slate};
@@ -19,6 +23,7 @@ const GlobalStyles = createGlobalStyle<{ theme?: Theme }>`
     --lightest-slate: ${({ theme }) => theme.colors.lightestSlate};
     --white: ${({ theme }) => theme.colors.white};
     --green: ${({ theme }) => theme.colors.green};
+    --green-gradient: ${({ theme }) => theme.colors.greenGradient};
     --nav-height: ${({ theme }) => theme.navHeight};
     --hamburger-width: ${({ theme }) => theme.hamburgerWidth};
     --transition: ${({ theme }) => theme.transitions.default};
@@ -58,12 +63,13 @@ const GlobalStyles = createGlobalStyle<{ theme?: Theme }>`
     overflow-x: hidden;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    background-color: var(--background);
+    background: var(--background-gradient);
+    background-attachment: fixed;
     color: var(--slate);
     font-family: ${({ theme }) => theme.fonts.primary};
     font-size: ${({ theme }) => theme.fontSizes.md};
     line-height: 1.5;
-    transition: background-color 0.5s ease;
+    transition: all 0.5s ease;
 
     &.blur {
       overflow: hidden;
@@ -103,7 +109,7 @@ const GlobalStyles = createGlobalStyle<{ theme?: Theme }>`
     }
 
     & + section {
-      margin-top: ${({ theme }) => theme.spacing.xl};
+      margin-top: ${({ theme }) => theme.spacing.lg};
     }
   }
 
@@ -117,7 +123,7 @@ const GlobalStyles = createGlobalStyle<{ theme?: Theme }>`
 
   h2 {
     font-size: clamp(26px, 5vw, ${({ theme }) => theme.fontSizes.heading});
-    
+
     @media (max-width: 768px) {
       margin: 0 0 ${({ theme }) => theme.spacing.lg} 0;
     }

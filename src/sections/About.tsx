@@ -1,7 +1,8 @@
-import styled from 'styled-components';
-import { motion, Variants } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { useLanguage } from '../contexts/LanguageContext';
+import styled from "styled-components";
+import { motion, Variants } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useLanguage } from "../contexts/LanguageContext";
+import TechnologyIcons from "../components/TechnologyIcons";
 
 const StyledAboutSection = styled.section`
   max-width: 900px;
@@ -25,7 +26,7 @@ const StyledText = styled.div`
       font-size: ${({ theme }) => theme.fontSizes.sm};
 
       &:before {
-        content: '▹';
+        content: "▹";
         position: absolute;
         left: 0;
         color: var(--green);
@@ -63,7 +64,7 @@ const StyledGrid = styled.div`
   display: grid;
   grid-template-columns: 3fr 2fr;
   gap: 50px;
-  
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
@@ -88,46 +89,35 @@ const About = () => {
     },
   };
 
-  const skillVariants: Variants = {
+  const techVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
-    visible: (i: number) => ({
+    visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        delay: 0.1 * i,
+        duration: 0.8,
+        delay: 0.3,
       },
-    }),
+    },
   };
 
-  const skills = [
-    'JavaScript',
-    'TypeScript',
-    'React',
-    'Node.js',
-    'Angular',
-    'MongoDB',
-    'SQL',
-    'HTML',
-  ];
-
-  const aboutText = t('about.description');
+  const aboutText = t("about.description");
   const paragraphs = Array.isArray(aboutText) ? aboutText : [aboutText];
 
   return (
     <StyledAboutSection id="about" ref={ref}>
       <motion.h2
         initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
+        animate={inView ? "visible" : "hidden"}
         variants={variants}
       >
-        {t('about.title')}
+        {t("about.title")}
       </motion.h2>
 
       <StyledGrid>
         <motion.div
           initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
+          animate={inView ? "visible" : "hidden"}
           variants={variants}
         >
           <StyledText>
@@ -135,31 +125,29 @@ const About = () => {
               <p key={i}>{paragraph}</p>
             ))}
 
-            <ul className="skills-list">
-              {skills.map((skill, i) => (
-                <motion.li
-                  key={i}
-                  initial="hidden"
-                  animate={inView ? 'visible' : 'hidden'}
-                  custom={i}
-                  variants={skillVariants}
-                >
-                  {skill}
-                </motion.li>
-              ))}
-            </ul>
+            <div className="tech-section">
+              <div className="tech-title">
+                {t("about.technologiesTitle") ||
+                  "Tecnologías que he estado trabajando recientemente:"}
+              </div>
+              <motion.div
+                initial="hidden"
+                animate={inView ? "visible" : "hidden"}
+                variants={techVariants}
+              >
+                <TechnologyIcons showNames={true} />
+              </motion.div>
+            </div>
           </StyledText>
         </motion.div>
 
         <StyledPic>
           <motion.div
             initial="hidden"
-            animate={inView ? 'visible' : 'hidden'}
+            animate={inView ? "visible" : "hidden"}
             variants={variants}
           >
-            <StyledAvatar>
-              {/* Add your profile image here */}
-            </StyledAvatar>
+            <StyledAvatar>{/* Add your profile image here */}</StyledAvatar>
           </motion.div>
         </StyledPic>
       </StyledGrid>
