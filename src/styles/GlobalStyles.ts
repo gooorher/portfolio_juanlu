@@ -7,6 +7,8 @@ const GlobalStyles = createGlobalStyle<{ theme?: Theme }>`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
   }
 
   /* Custom Properties */
@@ -65,11 +67,14 @@ const GlobalStyles = createGlobalStyle<{ theme?: Theme }>`
     -webkit-font-smoothing: antialiased;
     background: var(--background-gradient);
     background-attachment: fixed;
+    background-size: cover;
     color: var(--slate);
     font-family: ${({ theme }) => theme.fonts.primary};
     font-size: ${({ theme }) => theme.fontSizes.md};
     line-height: 1.5;
     transition: all 0.5s ease;
+    min-width: 320px;
+    max-width: 100vw;
 
     &.blur {
       overflow: hidden;
@@ -80,6 +85,16 @@ const GlobalStyles = createGlobalStyle<{ theme?: Theme }>`
         pointer-events: none;
         user-select: none;
       }
+    }
+
+    @media (max-width: 768px) {
+      min-width: 320px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    @media (max-width: 480px) {
+      min-width: 300px;
     }
   }
 

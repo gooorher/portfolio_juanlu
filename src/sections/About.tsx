@@ -8,10 +8,19 @@ const StyledAboutSection = styled.section`
   max-width: 900px;
   width: 100%;
   overflow-x: hidden;
+  margin: 0 auto;
+  position: relative;
 
   @media (max-width: 768px) {
-    max-width: 100%;
+    max-width: 100vw;
+    padding: 0 20px;
+    width: 100%;
+    min-width: 320px;
+  }
+
+  @media (max-width: 480px) {
     padding: 0 15px;
+    min-width: 300px;
   }
 `;
 
@@ -21,6 +30,25 @@ const StyledText = styled.div`
   overflow-x: hidden;
   word-wrap: break-word;
   overflow-wrap: break-word;
+  position: relative;
+
+  p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: calc(100vw - 40px);
+    min-width: 280px;
+  }
+
+  @media (max-width: 480px) {
+    max-width: calc(100vw - 30px);
+    min-width: 270px;
+  }
   ul.skills-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(140px, 200px));
@@ -32,15 +60,16 @@ const StyledText = styled.div`
 
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
-      gap: 5px 0;
-      minmax(0, 1fr);
+      gap: 8px 0;
+      width: 100%;
+      max-width: 100%;
     }
 
     @media (max-width: 480px) {
       grid-template-columns: 1fr;
-      minmax(0, 1fr);
-      word-wrap: break-word;
-      overflow-wrap: break-word;
+      gap: 6px 0;
+      width: 100%;
+      max-width: 100%;
     }
 
     li {
@@ -49,10 +78,16 @@ const StyledText = styled.div`
       padding-left: 20px;
       font-family: ${({ theme }) => theme.fonts.mono};
       font-size: ${({ theme }) => theme.fontSizes.sm};
+      width: 100%;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      line-height: 1.4;
 
       @media (max-width: 768px) {
         font-size: ${({ theme }) => theme.fontSizes.xs};
         margin-bottom: 8px;
+        padding-left: 15px;
+        width: calc(100% - 15px);
       }
 
       &:before {
@@ -115,16 +150,22 @@ const StyledGrid = styled.div`
   grid-template-columns: 3fr 2fr;
   gap: 50px;
   width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
+  position: relative;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 30px;
+    width: 100%;
+    max-width: calc(100vw - 40px);
   }
 
   @media (max-width: 480px) {
     grid-template-columns: 1fr;
     gap: 20px;
+    width: 100%;
+    max-width: calc(100vw - 30px);
   }
 `;
 
