@@ -24,12 +24,25 @@ const StyledGrid = styled.div`
 
 const StyledProjectCard = styled(motion.div)`
   position: relative;
-  cursor: default;
+  cursor: pointer;
   transition: var(--transition);
 
   &:hover {
     .project-inner {
-      transform: translateY(-7px);
+      transform: translateY(-10px);
+      box-shadow:
+        0 20px 40px rgba(100, 255, 218, 0.1),
+        0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-tech-list {
+      opacity: 0.8;
+    }
+
+    .project-links a {
+      transform: scale(1.1);
+      z-index: 10;
+      position: relative;
     }
   }
 `;
@@ -46,8 +59,29 @@ const StyledProjectInner = styled.div`
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--glassmorphism-border);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform-style: preserve-3d;
+  transform: translateZ(0);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      rgba(100, 255, 218, 0.03) 50%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
 
   header {
     width: 100%;

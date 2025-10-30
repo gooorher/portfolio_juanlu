@@ -1,7 +1,8 @@
-import styled from 'styled-components';
-import { motion, Variants } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { useLanguage } from '../contexts/LanguageContext';
+import styled from "styled-components";
+import { motion, Variants } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useLanguage } from "../contexts/LanguageContext";
+import CVButtons from "../components/CVButtons";
 
 const StyledContactSection = styled.section`
   max-width: 600px;
@@ -18,6 +19,13 @@ const StyledContent = styled.div`
   p {
     margin: 0 0 ${({ theme }) => theme.spacing.xl} 0;
     color: var(--slate);
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: ${({ theme }) => theme.spacing.md};
   }
 `;
 
@@ -50,7 +58,7 @@ const Contact = () => {
     triggerOnce: true,
   });
 
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const variants: Variants = {
     hidden: { opacity: 0, y: 20 },
@@ -67,21 +75,32 @@ const Contact = () => {
     <StyledContactSection id="contact" ref={ref}>
       <motion.div
         initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
+        animate={inView ? "visible" : "hidden"}
         variants={variants}
       >
-        <StyledTitle>{t('contact.title')}</StyledTitle>
-        
-        <StyledContent>
-          <p>{t('contact.description')}</p>
+        <StyledTitle>{t("contact.title")}</StyledTitle>
 
-          <StyledButton
-            href="mailto:juaaanlu@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
+        <StyledContent>
+          <p>{t("contact.description")}</p>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "20px",
+              marginTop: "32px",
+            }}
           >
-            {t('contact.button')}
-          </StyledButton>
+            <StyledButton
+              href="mailto:juaaanlu@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t("contact.button")}
+            </StyledButton>
+
+            <CVButtons language={language} />
+          </div>
         </StyledContent>
       </motion.div>
     </StyledContactSection>
