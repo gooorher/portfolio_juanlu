@@ -8,8 +8,15 @@ const StyledTechGrid = styled.div`
   max-width: 600px;
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-    gap: ${({ theme }) => theme.spacing.md};
+    grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
+    gap: ${({ theme }) => theme.spacing.sm};
+    margin-top: ${({ theme }) => theme.spacing.md};
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    gap: ${({ theme }) => theme.spacing.xs};
+    margin-top: ${({ theme }) => theme.spacing.sm};
   }
 `;
 
@@ -46,9 +53,15 @@ const StyledTechIcon = styled.div`
   transition: all 0.3s ease;
 
   @media (max-width: 768px) {
-    width: 40px;
-    height: 40px;
-    font-size: 24px;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+  @media (max-width: 480px) {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
   }
 `;
 
@@ -59,6 +72,14 @@ const StyledTechName = styled.span`
   opacity: 0.8;
   transition: all 0.3s ease;
   text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 9px;
+  }
 `;
 
 interface Technology {

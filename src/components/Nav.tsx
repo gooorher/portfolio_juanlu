@@ -15,7 +15,7 @@ const StyledHeader = styled(motion.header)`
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--glassmorphism-border);
-  z-index: 1000;
+  z-index: 999;
   transition: all 0.3s ease;
 
   &:hover {
@@ -43,20 +43,21 @@ const StyledLinks = styled.div<{ menuOpen: boolean }>`
 
   @media (max-width: 768px) {
     position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: min(75vw, 400px);
+    top: 60px;
+    right: 10px;
+    width: 250px;
     flex-direction: column;
-    justify-content: center;
-    background-color: var(--light-navy);
-    box-shadow: -10px 0px 30px -15px rgba(2, 12, 27, 0.7);
-    padding: ${({ theme }) => theme.spacing.xl};
-    transform: translateX(${(props) => (props.menuOpen ? "0" : "100%")});
+    background: var(--light-navy);
+    box-shadow: -5px 0px 20px rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--green);
+    padding: 20px;
+    transform: translateX(${(props) => (props.menuOpen ? "0" : "270px")});
     transition: transform 0.3s ease-in-out;
-    gap: ${({ theme }) => theme.spacing.xl};
-    z-index: 1001;
-    will-change: transform;
+    gap: 15px;
+    z-index: 10000;
+    border-radius: 8px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
   }
 `;
 
@@ -97,10 +98,38 @@ const StyledNavLink = styled(motion.a)<{ $isActive?: boolean }>`
   }
 
   @media (max-width: 768px) {
-    font-size: ${({ theme }) => theme.fontSizes.lg};
+    /* Reset all possible hiding properties */
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: static !important;
+    z-index: auto !important;
+    transform: none !important;
+    clip: auto !important;
+    clip-path: none !important;
+
+    /* Simple mobile styles */
+    font-size: 18px !important;
+    font-weight: 600 !important;
+    padding: 15px 20px !important;
+    margin: 8px 0 !important;
+    border-radius: 8px !important;
+    background: rgba(100, 255, 218, 0.1) !important;
+    border: 2px solid rgba(100, 255, 218, 0.3) !important;
+    width: 100% !important;
+    text-align: center !important;
+    color: var(--lightest-slate) !important;
+    text-decoration: none !important;
 
     &:hover {
       transform: translateY(-2px);
+      background: rgba(100, 255, 218, 0.2);
+      border-color: var(--green);
+      box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
     }
   }
 `;
@@ -206,12 +235,14 @@ const StyledOverlay = styled(motion.div)<{ menuOpen: boolean }>`
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(10, 25, 47, 0.85);
+    background-color: rgba(10, 25, 47, 0.95);
     pointer-events: ${(props) => (props.menuOpen ? "auto" : "none")};
     opacity: ${(props) => (props.menuOpen ? 1 : 0)};
     transition: opacity 0.3s ease-in-out;
     z-index: 999;
     will-change: opacity;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
   }
 `;
 
@@ -242,14 +273,42 @@ const Nav = () => {
 
   // Handle scroll lock when menu is open
   useEffect(() => {
+    const htmlElement = document.documentElement;
+    const bodyElement = document.body;
+
     if (menuOpen) {
-      document.body.style.overflow = "hidden";
+      // Only lock scroll on mobile when menu is open
+      if (window.innerWidth <= 768) {
+        const scrollY = window.scrollY;
+
+        // Save current scroll position
+        bodyElement.style.position = "fixed";
+        bodyElement.style.top = `-${scrollY}px`;
+        bodyElement.style.width = "100%";
+        bodyElement.style.overflow = "hidden";
+        htmlElement.style.overflow = "hidden";
+      }
     } else {
-      document.body.style.overflow = "";
+      // Restore scroll
+      const scrollY = bodyElement.style.top;
+      bodyElement.style.position = "";
+      bodyElement.style.top = "";
+      bodyElement.style.width = "";
+      bodyElement.style.overflow = "";
+      htmlElement.style.overflow = "";
+
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      }
     }
 
     return () => {
-      document.body.style.overflow = "";
+      // Cleanup
+      bodyElement.style.position = "";
+      bodyElement.style.top = "";
+      bodyElement.style.width = "";
+      bodyElement.style.overflow = "";
+      htmlElement.style.overflow = "";
     };
   }, [menuOpen]);
 

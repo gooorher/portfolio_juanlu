@@ -6,9 +6,21 @@ import TechnologyIcons from "../components/TechnologyIcons";
 
 const StyledAboutSection = styled.section`
   max-width: 900px;
+  width: 100%;
+  overflow-x: hidden;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    padding: 0 15px;
+  }
 `;
 
 const StyledText = styled.div`
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
   ul.skills-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(140px, 200px));
@@ -18,12 +30,30 @@ const StyledText = styled.div`
     overflow: hidden;
     list-style: none;
 
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 5px 0;
+      minmax(0, 1fr);
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+      minmax(0, 1fr);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
     li {
       position: relative;
       margin-bottom: 10px;
       padding-left: 20px;
       font-family: ${({ theme }) => theme.fonts.mono};
       font-size: ${({ theme }) => theme.fontSizes.sm};
+
+      @media (max-width: 768px) {
+        font-size: ${({ theme }) => theme.fontSizes.xs};
+        margin-bottom: 8px;
+      }
 
       &:before {
         content: "▹";
@@ -32,6 +62,26 @@ const StyledText = styled.div`
         color: var(--green);
         font-size: ${({ theme }) => theme.fontSizes.sm};
         line-height: 12px;
+
+        @media (max-width: 768px) {
+          font-size: ${({ theme }) => theme.fontSizes.xs};
+        }
+      }
+    }
+  }
+
+  .tech-section {
+    margin-top: ${({ theme }) => theme.spacing.xl};
+
+    .tech-title {
+      color: var(--light-slate);
+      font-size: ${({ theme }) => theme.fontSizes.sm};
+      margin-bottom: ${({ theme }) => theme.spacing.md};
+      line-height: 1.4;
+
+      @media (max-width: 768px) {
+        font-size: ${({ theme }) => theme.fontSizes.xs};
+        margin-bottom: ${({ theme }) => theme.spacing.sm};
       }
     }
   }
@@ -64,9 +114,17 @@ const StyledGrid = styled.div`
   display: grid;
   grid-template-columns: 3fr 2fr;
   gap: 50px;
+  width: 100%;
+  overflow-x: hidden;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 `;
 

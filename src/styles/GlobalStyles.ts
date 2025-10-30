@@ -97,6 +97,10 @@ const GlobalStyles = createGlobalStyle<{ theme?: Theme }>`
     @media (max-width: 768px) {
       padding: 0 ${({ theme }) => theme.spacing.sm};
     }
+
+    @media (max-width: 480px) {
+      padding: 0 ${({ theme }) => theme.spacing.xs};
+    }
   }
 
   section {
