@@ -3,6 +3,7 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import Layout from "./components/Layout";
 import ParticleBackground from "./components/ParticleBackground";
 import CustomCursor from "./components/CustomCursor";
+import { usePreventZoom } from "./hooks/usePreventZoom";
 import Hero from "./sections/Hero";
 import About from "./sections/About";
 import Experience from "./sections/Experience";
@@ -11,6 +12,9 @@ import Projects from "./sections/Projects";
 import Contact from "./sections/Contact";
 
 function App() {
+  // Prevent zoom on mobile devices
+  usePreventZoom();
+
   return (
     <LanguageProvider>
       <ThemeProvider>

@@ -11,6 +11,14 @@ const GlobalStyles = createGlobalStyle<{ theme?: Theme }>`
     -ms-text-size-adjust: 100%;
   }
 
+  /* Force mobile viewport scale */
+  @viewport {
+    width: device-width;
+    initial-scale: 1.0;
+    maximum-scale: 1.0;
+    user-scalable: 0;
+  }
+
   /* Custom Properties */
   :root {
     --background: ${({ theme }) => theme.colors.background};
@@ -36,6 +44,18 @@ const GlobalStyles = createGlobalStyle<{ theme?: Theme }>`
     box-sizing: border-box;
     width: 100%;
     scroll-padding-top: 100px;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    width: 100%;
+    height: 100%;
   }
 
   /* Scrollbar Styles */
