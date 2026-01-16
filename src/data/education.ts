@@ -32,10 +32,13 @@ export const education: Education[] = [
         location: "Bucharest, Romania",
         period: "2022 - 2023",
         logo: "/images/upb-logo.png",
-        highlights: [
-            "Advanced algorithms and data structures",
-            "Distributed systems architecture",
-            "Cross-cultural collaboration in engineering projects"
+        specializations: [
+            "Machine Learning for Economics (Econometrics, Predictive Modeling)",
+            "Financial Data Analysis & Quantitative Methods",
+            "Game Theory & Strategic Decision Making",
+            "Advanced Algorithms & Data Structures",
+            "Distributed Systems Architecture",
+            "Neural Networks & Deep Learning Foundations"
         ]
     },
     {

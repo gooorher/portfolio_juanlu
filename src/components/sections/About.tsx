@@ -3,13 +3,14 @@
 import { about } from "@/data/about"
 import { socialLinks } from "@/data/social-links"
 import { motion } from "framer-motion"
-import { Download, Book, Activity, Music } from "lucide-react"
+import { Download, Book } from "lucide-react"
+import { Spotify, Strava } from "@/components/shared/Icons"
 import { Button } from "@/components/ui/button"
 
 const interestIcons = {
     Book,
-    Activity,
-    Music
+    Spotify,
+    Strava
 }
 
 export function About() {

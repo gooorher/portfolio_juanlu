@@ -27,7 +27,9 @@ export default function ContactPage() {
                                 </div>
                                 <div>
                                     <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">Email</p>
-                                    <p className="font-medium text-foreground">juanlu@example.com</p>
+                                    <a href="mailto:juaaanlu@gmail.com" className="font-medium text-foreground hover:text-primary transition-colors">
+                                        juaaanlu@gmail.com
+                                    </a>
                                 </div>
                             </div>
                             <div className="flex items-center space-x-4">
@@ -36,8 +38,8 @@ export default function ContactPage() {
                                 </div>
                                 <div>
                                     <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">LinkedIn</p>
-                                    <a href="https://linkedin.com/in/juanlugordillo" className="font-medium text-foreground hover:text-primary transition-colors">
-                                        juanlugordillo
+                                    <a href="https://linkedin.com/in/jgordilloh" className="font-medium text-foreground hover:text-primary transition-colors">
+                                        jgordilloh
                                     </a>
                                 </div>
                             </div>
@@ -47,8 +49,8 @@ export default function ContactPage() {
                                 </div>
                                 <div>
                                     <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">GitHub</p>
-                                    <a href="https://github.com/juanlugordillo" className="font-medium text-foreground hover:text-primary transition-colors">
-                                        juanlugordillo
+                                    <a href="https://github.com/gooorher" className="font-medium text-foreground hover:text-primary transition-colors">
+                                        gooorher
                                     </a>
                                 </div>
                             </div>

@@ -2,7 +2,8 @@
 
 import { socialLinks } from "@/data/social-links"
 import { SocialLink } from "@/types"
-import { Github, Linkedin, Mail, Instagram, Book, Activity, Music } from "lucide-react"
+import { Github, Linkedin, Mail, Instagram, Book } from "lucide-react"
+import { Spotify, Strava } from "@/components/shared/Icons"
 
 const icons = {
     Github,
@@ -10,8 +11,8 @@ const icons = {
     Mail,
     Instagram,
     Book,
-    Activity,
-    Music
+    Spotify,
+    Strava
 }
 
 export function SocialLinks({ className = "", iconSize = 20 }: { className?: string, iconSize?: number }) {

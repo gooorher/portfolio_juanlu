@@ -5,7 +5,7 @@ export const experience: Experience[] = [
         id: "ey-santander-support",
         title: "Financial Systems Support Engineer (AI)",
         company: "EY / Santander",
-        location: "Madrid, Spain",
+        location: "Málaga, Spain",
         period: "Mar 2025 - Present",
         type: "Full-time",
         highlights: [
@@ -19,7 +19,7 @@ export const experience: Experience[] = [
         id: "ey-santander-fullstack",
         title: "Full Stack Engineer",
         company: "EY / Santander",
-        location: "Madrid, Spain",
+        location: "Málaga, Spain",
         period: "Jun 2024 - Mar 2025",
         type: "Full-time",
         highlights: [

@@ -12,22 +12,22 @@ export const about = {
             link: "https://www.goodreads.com/user/show/175064061"
         },
         {
-            icon: "Activity",
-            title: "Running & Cycling",
-            description: "Training for half-marathons and mountain trails",
+            icon: "Strava",
+            title: "Padel, Football & Tennis",
+            description: "Running trails, competitive padel matches and weekend football",
             link: "https://strava.app.link/3tso5WhgoRb"
         },
         {
-            icon: "Music",
+            icon: "Spotify",
             title: "Music",
-            description: "Coding to lo-fi and deep house playlists",
+            description: "Electronic music enthusiast",
             link: "https://open.spotify.com/user/juaaanlu"
         }
     ],
 
     stats: [
-        { label: "Years Experience", value: "3+" },
-        { label: "Projects Delivered", value: "12+" },
+        { label: "Years Experience", value: "2" },
+        { label: "Projects Delivered", value: "5" },
         { label: "Customer Satisfaction", value: "95%" }
     ]
 }

@@ -39,14 +39,14 @@ export const socialLinks: SocialLink[] = [
     {
         name: "Strava",
         url: "https://strava.app.link/3tso5WhgoRb",
-        icon: "Activity",
+        icon: "Strava",
         color: "#FC4C02",
         category: "personal"
     },
     {
         name: "Spotify",
         url: "https://open.spotify.com/user/juaaanlu",
-        icon: "Music",
+        icon: "Spotify",
         color: "#1DB954",
         category: "personal"
     }
