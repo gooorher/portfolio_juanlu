@@ -84,22 +84,41 @@ import { Redis } from "@upstash/redis"
 import { createHash } from "crypto"
 
 // Initialize rate limiters
-const redis = Redis.fromEnv()
+// Try to initialize Redis with Vercel KV or Upstash credentials
+const kvUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL
+const kvToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN
 
-// User ratelimit: 10 messages per 24 hours
-const userRatelimit = new Ratelimit({
-    redis,
-    limiter: Ratelimit.slidingWindow(10, "24 h"),
-    analytics: true,
-    prefix: "chatbot_user"
-})
+let redis: Redis | null = null
+let userRatelimit: Ratelimit | null = null
+let globalRatelimit: Ratelimit | null = null
 
-// Global ratelimit: 500 messages per 24 hours
-const globalRatelimit = new Ratelimit({
-    redis,
-    limiter: Ratelimit.slidingWindow(500, "24 h"),
-    prefix: "chatbot_global"
-})
+if (kvUrl && kvToken) {
+    try {
+        redis = new Redis({
+            url: kvUrl,
+            token: kvToken,
+        })
+
+        // User ratelimit: 10 messages per 24 hours
+        userRatelimit = new Ratelimit({
+            redis,
+            limiter: Ratelimit.slidingWindow(10, "24 h"),
+            analytics: true,
+            prefix: "chatbot_user"
+        })
+
+        // Global ratelimit: 500 messages per 24 hours
+        globalRatelimit = new Ratelimit({
+            redis,
+            limiter: Ratelimit.slidingWindow(500, "24 h"),
+            prefix: "chatbot_global"
+        })
+    } catch (e) {
+        console.warn("Failed to initialize Redis or Ratelimit:", e)
+    }
+} else {
+    console.warn("KV_REST_API_URL or KV_REST_API_TOKEN not found. Rate limiting disabled.")
+}
 
 // Create fingerprint from request
 function createFingerprint(request: Request): string {
@@ -116,6 +135,9 @@ function createFingerprint(request: Request): string {
 }
 
 export async function POST(request: Request) {
+    let limitCheck = { success: true, remaining: 10, reset: 0 }
+
+    // Rate Limit Check (Fail Open)
     try {
         const fingerprint = createFingerprint(request)
 
@@ -143,6 +165,20 @@ export async function POST(request: Request) {
                 { status: 429 }
             )
         }
+
+        limitCheck = {
+            success: true,
+            remaining: userCheck.remaining,
+            reset: userCheck.reset
+        }
+
+    } catch (error) {
+        console.error('Rate limit error (Failing Open):', error)
+        // Proceed even if rate limiting fails
+    }
+
+    try {
+        // Parse request
 
         // Parse request
         const { message, conversationHistory = [] } = await request.json()
@@ -186,22 +222,25 @@ export async function POST(request: Request) {
             message: result.message,
             usage: result.usage,
             demo: {
-                remaining: userCheck.remaining,
-                resetAt: new Date(userCheck.reset).toISOString()
+                remaining: limitCheck.remaining,
+                resetAt: limitCheck.reset > 0 ? new Date(limitCheck.reset).toISOString() : new Date(Date.now() + 86400000).toISOString()
             }
         }, {
             headers: {
-                'X-RateLimit-Remaining': userCheck.remaining.toString(),
-                'X-RateLimit-Reset': userCheck.reset.toString()
+                'X-RateLimit-Remaining': limitCheck.remaining.toString(),
+                'X-RateLimit-Reset': limitCheck.reset.toString()
             }
         })
 
     } catch (error) {
         console.error('Chatbot API error:', error)
+        // ... (rest of error handling)
+        console.error('Chatbot API error:', error)
 
         // Error específico de Vertex AI
         if (error instanceof Error) {
-            if (error.message.includes('quota')) {
+            // Check for code 8 (RESOURCE_EXHAUSTED) or quota messages
+            if (error.message.includes('quota') || error.message.includes('Resource exhausted') || (error as any).code === 8) {
                 return NextResponse.json(
                     { error: 'Service temporarily at capacity. Please try again shortly.' },
                     { status: 503 }
