@@ -47,7 +47,9 @@ export function ChatbotDemo() {
     }, [demoStatus])
 
     useEffect(() => {
-        scrollToBottom()
+        if (messages.length > 1) {
+            scrollToBottom()
+        }
     }, [messages])
 
     const handleSubmit = async (e: React.FormEvent) => {

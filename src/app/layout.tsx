@@ -32,10 +32,24 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              if (window.history.scrollRestoration) {
-                window.history.scrollRestoration = 'manual';
-              }
-              window.scrollTo(0, 0);
+              (function() {
+                // Prevent browser scroll restoration
+                if (window.history.scrollRestoration) {
+                  window.history.scrollRestoration = 'manual';
+                }
+                
+                // Only force top scroll if no hash in URL
+                if (!window.location.hash) {
+                  // Disable smooth scrolling temporarily
+                  document.documentElement.style.scrollBehavior = 'auto';
+                  window.scrollTo(0, 0);
+                  
+                  // Re-enable after mount
+                  requestAnimationFrame(() => {
+                    document.documentElement.style.scrollBehavior = '';
+                  });
+                }
+              })();
             `,
           }}
         />
