@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { ContactTemplate } from '@/components/email/ContactTemplate';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || 're_missing_key');
 
 export async function POST(request: Request) {
     try {
@@ -22,13 +22,15 @@ export async function POST(request: Request) {
             to: ['juaaanlu@gmail.com'], // Deliver to your personal email
             replyTo: email,
             subject: `Portfolio Contact: ${subject || 'New Message'}`,
-            react: ContactTemplate({
-                firstName,
-                lastName,
-                email,
-                subject,
-                message,
-            }),
+            react: (
+                <ContactTemplate
+                    firstName={firstName}
+                    lastName={lastName}
+                    email={email}
+                    subject={subject}
+                    message={message}
+                />
+            ),
         });
 
         if (error) {

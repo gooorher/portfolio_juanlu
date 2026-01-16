@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 import { Navbar } from "@/components/navbar"
 import { Button } from "@/components/ui/button"

@@ -15,7 +15,12 @@ const interestIcons = {
 export function About() {
     return (
         <section id="about" className="py-20 relative overflow-hidden">
-            <div className="container mx-auto px-4">
+            <div className="absolute top-0 right-0 w-1/3 h-full bg-[var(--primary)]/5 blur-[100px] pointer-events-none" />
+            {/* Subtle Hero Visual Background */}
+            <div className="absolute top-1/2 right-0 -translate-y-1/2 w-1/2 h-full opacity-5 pointer-events-none mix-blend-overlay">
+                <img src="/images/hero_visual.png" alt="" className="object-contain w-full h-full" />
+            </div>
+            <div className="container mx-auto px-4 relative z-10">
                 <div className="flex flex-col lg:flex-row gap-12 items-center">
 
                     {/* Left Column: Bio & Stats */}

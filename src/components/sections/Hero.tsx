@@ -8,7 +8,7 @@ import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { MetricCounter } from "@/components/animations/MetricCounter"
 import { NeuralNetwork } from "@/components/animations/NeuralNetwork"
-import { SocialLinks } from "@/components/shared/SocialLinks"
+
 import { cn } from "@/lib/utils"
 
 export function Hero() {
@@ -114,9 +114,7 @@ export function Hero() {
                                 Contact Me <Mail className="w-4 h-4" />
                             </Link>
                         </Button>
-                        <div className="flex gap-2 ml-2">
-                            <SocialLinks iconSize={24} />
-                        </div>
+
                     </motion.div>
                 </div>
 

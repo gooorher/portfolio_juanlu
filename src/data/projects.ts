@@ -12,8 +12,8 @@ export const projects: Project[] = [
         longDescription: "Built a production-grade FastAPI backend with LLM integration for automated data extraction from complex PDF invoices. Implements OCR preprocessing, entity recognition, and structured data recovery with 95% accuracy.",
         tags: ["FastAPI", "OpenAI", "OCR", "React", "Docker", "PostgreSQL"],
         image: {
-            thumbnail: "/images/facturized-thumb.png",
-            hero: "/images/facturized-hero.png"
+            thumbnail: "/images/facturized.png",
+            hero: "/images/facturized.png"
         },
         metrics: [
             { label: "Extraction Accuracy", value: "95%" },
@@ -47,8 +47,8 @@ export const projects: Project[] = [
         longDescription: "Architected and deployed a production-grade ML pipeline for fraud detection with automated model retraining, drift detection, and real-time alerting. Integrated LangChain for LLM-powered anomaly explanation.",
         tags: ["Python", "LangChain", "OpenAI", "Scikit-learn", "FastAPI", "Docker"],
         image: {
-            thumbnail: "/images/mlops-thumb.png",
-            hero: "/images/mlops-hero.png"
+            thumbnail: "/images/mlops.png",
+            hero: "/images/mlops.png"
         },
         metrics: [
             { label: "Daily Transactions", value: "50M+" },
@@ -56,7 +56,7 @@ export const projects: Project[] = [
             { label: "False Positive Reduction", value: "40%" }
         ],
         githubUrl: "https://github.com/gooorher/mlops-cybersecurity-project",
-        caseStudyPath: "/projects/mlops-cyber-defense",
+        caseStudyPath: "/projects/mlops-cybersecurity",
         highlights: [
             "Automated CI/CD pipeline with GitHub Actions",
             "Real-time model drift monitoring with Prometheus",
@@ -81,8 +81,8 @@ export const projects: Project[] = [
         longDescription: "Developed end-to-end NLP pipeline for analyzing Ukrainian crisis tweets. Built Flask API with MongoDB for storing and querying 4M+ processed records. Implemented custom NLP models for entity extraction and sentiment classification.",
         tags: ["Python", "Flask", "MongoDB", "NLTK", "Transformers", "Docker"],
         image: {
-            thumbnail: "/images/nlp-thumb.png",
-            hero: "/images/nlp-hero.png"
+            thumbnail: "/images/nlp.png",
+            hero: "/images/nlp.png"
         },
         metrics: [
             { label: "Records Processed", value: "4M+" },
@@ -90,7 +90,7 @@ export const projects: Project[] = [
             { label: "Sentiment Accuracy", value: "94%" }
         ],
         githubUrl: "https://github.com/gooorher/Ukraine-Crisis-Tweets-Analysis",
-        caseStudyPath: "/projects/nlp-global-analytics",
+        caseStudyPath: "/projects/nlp-analysis",
         highlights: [
             "Custom NLP pipeline for Spanish entity recognition",
             "Real-time analytics dashboard with geospatial visualization",
@@ -115,8 +115,8 @@ export const projects: Project[] = [
         longDescription: "Built with Next.js 15, featuring Gemini-powered chatbot for portfolio Q&A, live code playground with Monaco Editor, and particle morphing background animations.",
         tags: ["Next.js", "TypeScript", "Gemini AI", "Motion", "Tailwind"],
         image: {
-            thumbnail: "/images/portfolio-thumb.png",
-            hero: "/images/portfolio-hero.png"
+            thumbnail: "/images/hero_visual.png",
+            hero: "/images/hero_visual.png"
         },
         metrics: [
             { label: "Lighthouse Score", value: "98" },
