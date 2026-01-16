@@ -55,13 +55,21 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
             >
                 <div className="relative flex h-full flex-col overflow-hidden rounded-xl border bg-card text-card-foreground shadow-sm glass-card hover:shadow-lg hover:border-primary/50 transition-colors">
                     {/* Image Area */}
+                    {/* Image Area */}
                     <div className="relative aspect-video w-full overflow-hidden bg-muted/50">
-                        {/* Placeholder for image */}
-                        <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/20 text-6xl font-bold">
-                            {project.title.charAt(0)}
-                        </div>
+                        {project.image?.thumbnail ? (
+                            <img
+                                src={project.image.thumbnail}
+                                alt={project.title}
+                                className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                            />
+                        ) : (
+                            <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/20 text-6xl font-bold">
+                                {project.title.charAt(0)}
+                            </div>
+                        )}
                         {/* Gradient Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-60" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-80" />
 
                         {/* Floating Tech Stack */}
                         <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">

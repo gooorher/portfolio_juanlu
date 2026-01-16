@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Github, Linkedin, Mail, Twitter } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { SocialLinks } from "@/components/shared/SocialLinks"
 
 export function Footer() {
     return (
@@ -19,26 +20,7 @@ export function Footer() {
                 </div>
 
                 <div className="flex gap-4">
-                    <Button variant="ghost" size="icon" asChild>
-                        <Link href="https://github.com" target="_blank" area-label="GitHub">
-                            <Github className="h-5 w-5" />
-                        </Link>
-                    </Button>
-                    <Button variant="ghost" size="icon" asChild>
-                        <Link href="https://linkedin.com" target="_blank" area-label="LinkedIn">
-                            <Linkedin className="h-5 w-5" />
-                        </Link>
-                    </Button>
-                    <Button variant="ghost" size="icon" asChild>
-                        <Link href="https://twitter.com" target="_blank" area-label="Twitter">
-                            <Twitter className="h-5 w-5" />
-                        </Link>
-                    </Button>
-                    <Button variant="ghost" size="icon" asChild>
-                        <Link href="mailto:contact@juanlucas.dev" area-label="Email">
-                            <Mail className="h-5 w-5" />
-                        </Link>
-                    </Button>
+                    <SocialLinks iconSize={20} />
                 </div>
             </div>
         </footer>

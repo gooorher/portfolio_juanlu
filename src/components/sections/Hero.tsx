@@ -8,6 +8,7 @@ import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { MetricCounter } from "@/components/animations/MetricCounter"
 import { NeuralNetwork } from "@/components/animations/NeuralNetwork"
+import { SocialLinks } from "@/components/shared/SocialLinks"
 import { cn } from "@/lib/utils"
 
 export function Hero() {
@@ -114,13 +115,7 @@ export function Hero() {
                             </Link>
                         </Button>
                         <div className="flex gap-2 ml-2">
-                            {/* Socials could go here or footer */}
-                            <Button size="icon" variant="ghost" asChild>
-                                <Link href="https://github.com" target="_blank"><Github className="w-5 h-5" /></Link>
-                            </Button>
-                            <Button size="icon" variant="ghost" asChild>
-                                <Link href="https://linkedin.com" target="_blank"><Linkedin className="w-5 h-5" /></Link>
-                            </Button>
+                            <SocialLinks iconSize={24} />
                         </div>
                     </motion.div>
                 </div>

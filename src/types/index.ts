@@ -18,9 +18,19 @@ export interface Project {
         icon?: string
     }[]
     caseStudyPath: string
-    githubUrl?: string
+    githubUrl?: string | null
     liveUrl?: string
     codeSnippet?: string // Highlighted code shown on hover
+    highlights: string[]
+    techStack?: {
+        frontend?: string[]
+        backend?: string[]
+        ai?: string[]
+        ml?: string[]
+        infrastructure?: string[]
+        nlp?: string[]
+        monitoring?: string[]
+    }
 }
 
 export interface Technology {
@@ -33,9 +43,33 @@ export interface Technology {
 
 export interface Experience {
     id: string
-    role: string
+    title: string
     company: string
+    location: string
     period: string
-    description: string[]
-    skills: string[]
+    type: "Full-time" | "Part-time" | "Contract" | "Freelance"
+    description?: string // Make optional if highlights are preferred
+    highlights: string[]
+    tags?: string[]
+}
+
+export interface Education {
+    id: string
+    degree: string
+    institution: string
+    location: string
+    period: string
+    gpa?: string
+    logo?: string
+    specializations?: string[]
+    thesis?: string
+    highlights: string[]
+}
+
+export interface SocialLink {
+    name: string
+    url: string
+    icon: string
+    color: string
+    category: "professional" | "personal" | "creative"
 }

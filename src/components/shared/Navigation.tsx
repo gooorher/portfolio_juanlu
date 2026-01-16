@@ -12,9 +12,10 @@ import { Button } from "@/components/ui/button"
 import { ScrollProgress } from "@/components/animations/ScrollProgress"
 
 const navItems = [
-    { name: "Projects", path: "/projects" },
-    { name: "About", path: "/about" },
-    { name: "Blog", path: "/blog" },
+    { name: "Projects", path: "/#projects" },
+    { name: "About", path: "/#about" },
+    { name: "Experience", path: "/#experience" },
+    { name: "Skills", path: "/#skills" },
 ]
 
 export function Navigation() {
