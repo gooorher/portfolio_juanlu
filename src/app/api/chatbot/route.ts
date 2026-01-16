@@ -138,48 +138,48 @@ export async function POST(request: Request) {
     let limitCheck = { success: true, remaining: 10, reset: 0 }
 
     // Rate Limit Check (Fail Open)
-    try {
-        const fingerprint = createFingerprint(request)
+    if (globalRatelimit && userRatelimit) {
+        try {
+            const fingerprint = createFingerprint(request)
 
-        // 1. Check global quota first
-        const globalCheck = await globalRatelimit.limit("global")
-        if (!globalCheck.success) {
-            return NextResponse.json(
-                {
-                    error: 'Demo chatbot at capacity. Try again later or email juaaanlu@gmail.com',
-                    resetAt: new Date(globalCheck.reset).toISOString()
-                },
-                { status: 503 }
-            )
+            // 1. Check global quota first
+            const globalCheck = await globalRatelimit.limit("global")
+            if (!globalCheck.success) {
+                return NextResponse.json(
+                    {
+                        error: 'Demo chatbot at capacity. Try again later or email juaaanlu@gmail.com',
+                        resetAt: new Date(globalCheck.reset).toISOString()
+                    },
+                    { status: 503 }
+                )
+            }
+
+            // 2. Check per-user limit
+            const userCheck = await userRatelimit.limit(fingerprint)
+            if (!userCheck.success) {
+                return NextResponse.json(
+                    {
+                        error: 'Demo limit reached (10/10 messages). Contact juaaanlu@gmail.com for extended conversations.',
+                        remaining: 0,
+                        resetAt: new Date(userCheck.reset).toISOString()
+                    },
+                    { status: 429 }
+                )
+            }
+
+            limitCheck = {
+                success: true,
+                remaining: userCheck.remaining,
+                reset: userCheck.reset
+            }
+
+        } catch (error) {
+            console.error('Rate limit error (Failing Open):', error)
+            // Proceed even if rate limiting fails
         }
-
-        // 2. Check per-user limit
-        const userCheck = await userRatelimit.limit(fingerprint)
-        if (!userCheck.success) {
-            return NextResponse.json(
-                {
-                    error: 'Demo limit reached (10/10 messages). Contact juaaanlu@gmail.com for extended conversations.',
-                    remaining: 0,
-                    resetAt: new Date(userCheck.reset).toISOString()
-                },
-                { status: 429 }
-            )
-        }
-
-        limitCheck = {
-            success: true,
-            remaining: userCheck.remaining,
-            reset: userCheck.reset
-        }
-
-    } catch (error) {
-        console.error('Rate limit error (Failing Open):', error)
-        // Proceed even if rate limiting fails
     }
 
     try {
-        // Parse request
-
         // Parse request
         const { message, conversationHistory = [] } = await request.json()
 
@@ -233,8 +233,6 @@ export async function POST(request: Request) {
         })
 
     } catch (error) {
-        console.error('Chatbot API error:', error)
-        // ... (rest of error handling)
         console.error('Chatbot API error:', error)
 
         // Error específico de Vertex AI
