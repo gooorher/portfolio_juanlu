@@ -1,3 +1,4 @@
+import * as React from "react"
 import { Navbar } from "@/components/navbar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -63,33 +64,7 @@ export default function ContactPage() {
                     </div>
 
                     <div className="bg-card p-8 rounded-2xl border border-border">
-                        <form className="space-y-6">
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <Label htmlFor="first-name">First Name</Label>
-                                    <Input id="first-name" placeholder="Juan" />
-                                </div>
-                                <div className="space-y-2">
-                                    <Label htmlFor="last-name">Last Name</Label>
-                                    <Input id="last-name" placeholder="Gordillo" />
-                                </div>
-                            </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="email">Email</Label>
-                                <Input id="email" type="email" placeholder="juan@example.com" />
-                            </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="subject">Subject</Label>
-                                <Input id="subject" placeholder="Potential Collaboration" />
-                            </div>
-                            <div className="space-y-2">
-                                <Label htmlFor="message">Message</Label>
-                                <Textarea id="message" placeholder="How can I help you?" className="min-h-[150px]" />
-                            </div>
-                            <Button className="w-full py-6 text-lg font-semibold rounded-xl">
-                                Send Message
-                            </Button>
-                        </form>
+                        <ContactForm />
                     </div>
                 </div>
             </main>
@@ -99,5 +74,81 @@ export default function ContactPage() {
                 </div>
             </footer>
         </div>
+    )
+}
+
+function ContactForm() {
+    const [isLoading, setIsLoading] = React.useState(false)
+    const [success, setSuccess] = React.useState(false)
+
+    async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        setIsLoading(true)
+
+        const formData = new FormData(event.currentTarget)
+        const data = {
+            firstName: formData.get("firstName"),
+            lastName: formData.get("lastName"),
+            email: formData.get("email"),
+            subject: formData.get("subject"),
+            message: formData.get("message"),
+        }
+
+        const response = await fetch("/api/send", {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+
+        if (response.ok) {
+            setSuccess(true)
+        }
+
+        setIsLoading(false)
+    }
+
+    if (success) {
+        return (
+            <div className="flex flex-col items-center justify-center space-y-4 text-center h-[400px]">
+                <div className="p-4 rounded-full bg-green-500/10 text-green-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
+                </div>
+                <h3 className="text-2xl font-bold">Message Sent!</h3>
+                <p className="text-muted-foreground">Thank you for reaching out. I'll get back to you shortly.</p>
+                <Button variant="outline" onClick={() => setSuccess(false)}>Send Another</Button>
+            </div>
+        )
+    }
+
+    return (
+        <form onSubmit={onSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                    <Label htmlFor="firstName">First Name</Label>
+                    <Input id="firstName" name="firstName" placeholder="Juan" required />
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="lastName">Last Name</Label>
+                    <Input id="lastName" name="lastName" placeholder="Gordillo" required />
+                </div>
+            </div>
+            <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" name="email" type="email" placeholder="juan@example.com" required />
+            </div>
+            <div className="space-y-2">
+                <Label htmlFor="subject">Subject</Label>
+                <Input id="subject" name="subject" placeholder="Potential Collaboration" required />
+            </div>
+            <div className="space-y-2">
+                <Label htmlFor="message">Message</Label>
+                <Textarea id="message" name="message" placeholder="How can I help you?" className="min-h-[150px]" required />
+            </div>
+            <Button className="w-full py-6 text-lg font-semibold rounded-xl" disabled={isLoading}>
+                {isLoading ? "Sending..." : "Send Message"}
+            </Button>
+        </form>
     )
 }
