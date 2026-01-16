@@ -28,7 +28,7 @@ export function FeaturedProjects() {
                 </motion.div>
 
                 {/* Grid Layout: 1 column on mobile, 2 on tablet/desktop */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
                     {projects.map((project, i) => (
                         <ProjectCard key={project.id} project={project} index={i} />
                     ))}

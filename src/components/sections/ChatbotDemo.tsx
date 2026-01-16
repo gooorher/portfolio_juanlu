@@ -22,11 +22,29 @@ export function ChatbotDemo() {
     ])
     const [input, setInput] = useState('')
     const [isLoading, setIsLoading] = useState(false)
+    const [demoStatus, setDemoStatus] = useState({ remaining: 10, total: 10 })
     const messagesEndRef = useRef<HTMLDivElement>(null)
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
+
+    // Load demo status from local storage on mount
+    useEffect(() => {
+        const savedStatus = localStorage.getItem('chatbot_demo_status')
+        if (savedStatus) {
+            try {
+                setDemoStatus(JSON.parse(savedStatus))
+            } catch (e) {
+                console.error("Failed to parse demo status", e)
+            }
+        }
+    }, [])
+
+    // Save demo status to local storage whenever it updates
+    useEffect(() => {
+        localStorage.setItem('chatbot_demo_status', JSON.stringify(demoStatus))
+    }, [demoStatus])
 
     useEffect(() => {
         scrollToBottom()
@@ -67,8 +85,22 @@ export function ChatbotDemo() {
                     role: 'assistant',
                     content: data.message
                 }])
+                if (data.demo) {
+                    setDemoStatus({ remaining: data.demo.remaining, total: 10 })
+                }
             } else {
-                throw new Error(data.error || 'Failed to fetch')
+                if (response.status === 429 || response.status === 503) {
+                    setMessages(prev => [...prev, {
+                        id: Date.now().toString(),
+                        role: 'assistant',
+                        content: data.error
+                    }])
+                    if (data.remaining !== undefined) {
+                        setDemoStatus(prev => ({ ...prev, remaining: 0 }))
+                    }
+                } else {
+                    throw new Error(data.error || 'Failed to fetch')
+                }
             }
         } catch (error) {
             console.error('Chat error:', error)
@@ -85,13 +117,21 @@ export function ChatbotDemo() {
     return (
         <div className="w-full max-w-md mx-auto h-[500px] border rounded-xl bg-card shadow-lg flex flex-col overflow-hidden glass-card">
             {/* Header */}
-            <div className="p-4 border-b bg-muted/50 flex items-center gap-3">
-                <div className="p-2 rounded-full bg-primary/10">
-                    <Bot className="w-5 h-5 text-primary" />
+            <div className="p-4 border-b bg-muted/50 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-full bg-primary/10">
+                        <Bot className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                        <h3 className="font-semibold text-sm">AI Assistant</h3>
+                        <p className="text-xs text-muted-foreground">Powered by Gemini 2.0 Flash</p>
+                    </div>
                 </div>
-                <div>
-                    <h3 className="font-semibold text-sm">AI Assistant</h3>
-                    <p className="text-xs text-muted-foreground">Powered by Gemini 2.0 Flash</p>
+                <div className={`px-2 py-1 rounded-full text-xs font-medium border ${demoStatus.remaining <= 2
+                    ? 'bg-red-500/10 text-red-500 border-red-500/20'
+                    : 'bg-primary/10 text-primary border-primary/20'
+                    }`}>
+                    Demo: {demoStatus.remaining}/{demoStatus.total}
                 </div>
             </div>
 
@@ -110,8 +150,8 @@ export function ChatbotDemo() {
                             </div>
                             <div
                                 className={`rounded-lg px-3 py-2 text-sm max-w-[80%] ${msg.role === 'user'
-                                        ? 'bg-primary text-primary-foreground'
-                                        : 'bg-muted text-foreground'
+                                    ? 'bg-primary text-primary-foreground'
+                                    : 'bg-muted text-foreground'
                                     }`}
                             >
                                 {msg.content}

@@ -79,40 +79,67 @@ A: "Juanlu's tech stack spans AI/ML (LangChain, OpenAI, Gemini, RAG), backend (P
 
 Now answer user questions following these guidelines.`
 
-// Rate limiting simple (mejorar en producción con Redis/Vercel KV)
-const requestCounts = new Map<string, { count: number; resetTime: number }>()
+import { Ratelimit } from "@upstash/ratelimit"
+import { Redis } from "@upstash/redis"
+import { createHash } from "crypto"
 
-function checkRateLimit(ip: string): boolean {
-    const now = Date.now()
-    const limit = 20 // 20 mensajes por hora
-    const windowMs = 60 * 60 * 1000 // 1 hora
+// Initialize rate limiters
+const redis = Redis.fromEnv()
 
-    const record = requestCounts.get(ip)
+// User ratelimit: 10 messages per 24 hours
+const userRatelimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(10, "24 h"),
+    analytics: true,
+    prefix: "chatbot_user"
+})
 
-    if (!record || now > record.resetTime) {
-        requestCounts.set(ip, { count: 1, resetTime: now + windowMs })
-        return true
-    }
+// Global ratelimit: 500 messages per 24 hours
+const globalRatelimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(500, "24 h"),
+    prefix: "chatbot_global"
+})
 
-    if (record.count >= limit) {
-        return false
-    }
+// Create fingerprint from request
+function createFingerprint(request: Request): string {
+    const ip = request.headers.get('x-forwarded-for') ||
+        request.headers.get('x-real-ip') ||
+        'unknown'
+    const userAgent = request.headers.get('user-agent') || ''
+    const acceptLang = request.headers.get('accept-language') || ''
 
-    record.count++
-    return true
+    return createHash('sha256')
+        .update(ip + userAgent + acceptLang)
+        .digest('hex')
+        .slice(0, 16)
 }
 
 export async function POST(request: Request) {
     try {
-        // Get IP for rate limiting
-        const ip = request.headers.get('x-forwarded-for') ||
-            request.headers.get('x-real-ip') ||
-            'unknown'
+        const fingerprint = createFingerprint(request)
 
-        // Check rate limit
-        if (!checkRateLimit(ip)) {
+        // 1. Check global quota first
+        const globalCheck = await globalRatelimit.limit("global")
+        if (!globalCheck.success) {
             return NextResponse.json(
-                { error: 'Too many requests. Please try again in an hour.' },
+                {
+                    error: 'Demo chatbot at capacity. Try again later or email juaaanlu@gmail.com',
+                    resetAt: new Date(globalCheck.reset).toISOString()
+                },
+                { status: 503 }
+            )
+        }
+
+        // 2. Check per-user limit
+        const userCheck = await userRatelimit.limit(fingerprint)
+        if (!userCheck.success) {
+            return NextResponse.json(
+                {
+                    error: 'Demo limit reached (10/10 messages). Contact juaaanlu@gmail.com for extended conversations.',
+                    remaining: 0,
+                    resetAt: new Date(userCheck.reset).toISOString()
+                },
                 { status: 429 }
             )
         }
@@ -157,7 +184,16 @@ export async function POST(request: Request) {
 
         return NextResponse.json({
             message: result.message,
-            usage: result.usage
+            usage: result.usage,
+            demo: {
+                remaining: userCheck.remaining,
+                resetAt: new Date(userCheck.reset).toISOString()
+            }
+        }, {
+            headers: {
+                'X-RateLimit-Remaining': userCheck.remaining.toString(),
+                'X-RateLimit-Reset': userCheck.reset.toString()
+            }
         })
 
     } catch (error) {

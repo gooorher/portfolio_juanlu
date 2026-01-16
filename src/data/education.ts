@@ -39,7 +39,8 @@ export const education: Education[] = [
             "Advanced Algorithms & Data Structures",
             "Distributed Systems Architecture",
             "Neural Networks & Deep Learning Foundations"
-        ]
+        ],
+        highlights: []
     },
     {
         id: "bachelor-telecom",
