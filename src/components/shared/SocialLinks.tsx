@@ -2,15 +2,15 @@
 
 import { socialLinks } from "@/data/social-links"
 import { SocialLink } from "@/types"
-import { Github, Linkedin, Mail, Instagram, Book } from "lucide-react"
-import { Spotify, Strava } from "@/components/shared/Icons"
+import { Github, Linkedin, Mail, Instagram } from "lucide-react"
+import { Spotify, Strava, Goodreads } from "@/components/shared/Icons"
 
 const icons = {
     Github,
     Linkedin,
     Mail,
     Instagram,
-    Book,
+    Goodreads,
     Spotify,
     Strava
 }

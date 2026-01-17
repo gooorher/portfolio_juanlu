@@ -4,7 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navigation } from "@/components/shared/Navigation";
 import { Footer } from "@/components/shared/Footer";
-import { CursorTrail } from "@/components/animations/CursorTrail";
+import { CustomCursor } from "@/components/ui/CustomCursor";
+import { SoundManager } from "@/components/ui/SoundManager";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -63,9 +64,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <CursorTrail />
+          <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-[10000] px-4 py-2 bg-primary text-primary-foreground rounded-md">
+            Skip to content
+          </a>
+          <CustomCursor />
+          <SoundManager />
           <Navigation />
-          <main className="min-h-screen bg-background text-foreground selection:bg-primary/20">
+          <main id="main-content" className="min-h-screen bg-background text-foreground selection:bg-primary/20">
             {children}
           </main>
           <Footer />

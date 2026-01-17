@@ -17,27 +17,27 @@ export function EducationCard({ education, index }: EducationCardProps) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="glass-card p-6 rounded-xl border border-white/10 hover:border-[var(--primary)]/50 transition-colors duration-300"
+            className="bg-[hsl(var(--card))] text-[hsl(var(--card-foreground))] p-6 rounded-xl border border-[hsl(var(--border))] hover:border-[var(--primary)]/50 transition-colors duration-300 shadow-sm"
         >
             <div className="flex flex-col h-full justify-between">
                 <div>
                     <div className="flex justify-between items-start mb-4">
-                        <div className="p-3 bg-white/5 rounded-lg">
+                        <div className="p-3 bg-[var(--primary)]/10 rounded-lg">
                             <GraduationCap className="text-[var(--primary)]" size={32} />
                         </div>
                         {education.gpa && (
                             <Badge variant="outline" className={`
-                    ${parseFloat(education.gpa) > 8 ? "border-green-500 text-green-400" : "border-blue-500 text-blue-400"}
+                    ${parseFloat(education.gpa) > 8 ? "border-green-500 text-green-500" : "border-blue-500 text-blue-500"}
                  `}>
                                 GPA: {education.gpa}
                             </Badge>
                         )}
                     </div>
 
-                    <h3 className="text-xl font-bold text-white mb-1">{education.degree}</h3>
-                    <p className="text-lg text-gray-300 mb-4">{education.institution}</p>
+                    <h3 className="text-xl font-bold text-[hsl(var(--foreground))] mb-1">{education.degree}</h3>
+                    <p className="text-lg text-muted-foreground mb-4">{education.institution}</p>
 
-                    <div className="flex flex-wrap gap-4 text-sm text-gray-400 mb-6">
+                    <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-6">
                         <div className="flex items-center gap-1">
                             <Calendar size={14} />
                             <span>{education.period}</span>
@@ -50,23 +50,23 @@ export function EducationCard({ education, index }: EducationCardProps) {
 
                     <div className="space-y-4">
                         {education.thesis && (
-                            <div className="bg-white/5 p-3 rounded-md">
-                                <p className="text-xs text-gray-500 uppercase tracking-wider mb-1">Thesis</p>
-                                <p className="text-sm text-gray-300 italic">"{education.thesis}"</p>
+                            <div className="bg-[var(--secondary)] p-3 rounded-md">
+                                <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Thesis</p>
+                                <p className="text-sm text-[hsl(var(--foreground))] italic">"{education.thesis}"</p>
                             </div>
                         )}
 
                         {education.specializations && education.specializations.length > 0 && (
                             <div>
-                                <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Key Areas</p>
+                                <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">Key Areas</p>
                                 <div className="flex flex-wrap gap-2">
                                     {education.specializations.slice(0, 4).map((spec, idx) => (
-                                        <span key={idx} className="text-xs bg-white/5 px-2 py-1 rounded text-gray-300">
+                                        <span key={idx} className="text-xs bg-[var(--secondary)] px-2 py-1 rounded text-muted-foreground">
                                             {spec.split('(')[0].trim()}
                                         </span>
                                     ))}
                                     {education.specializations.length > 4 && (
-                                        <span className="text-xs bg-white/5 px-2 py-1 rounded text-gray-400">
+                                        <span className="text-xs bg-[var(--secondary)] px-2 py-1 rounded text-muted-foreground">
                                             +{education.specializations.length - 4} more
                                         </span>
                                     )}

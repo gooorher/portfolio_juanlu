@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { Heart } from "lucide-react"
 import { SocialLinks } from "@/components/shared/SocialLinks"
 
 export function Footer() {
@@ -41,8 +42,8 @@ export function Footer() {
 
                 {/* Bottom bar */}
                 <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-xs text-muted-foreground">
-                        © {new Date().getFullYear()} Juan Lucas Gordillo. Built with Next.js & Gemini AI.
+                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                        © {new Date().getFullYear()} Juan Lucas Gordillo. Built with <Heart className="w-3 h-3 text-red-500 fill-red-500" /> in Spain with Next.js, TypeScript & Tailwind CSS.
                     </p>
                     <div className="flex gap-4 text-xs text-muted-foreground">
                         <Link href="/privacy" className="hover:text-primary transition-colors">Privacy</Link>

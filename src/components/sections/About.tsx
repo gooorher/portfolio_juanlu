@@ -2,13 +2,14 @@
 
 import { about } from "@/data/about"
 import { socialLinks } from "@/data/social-links"
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { Download, Book } from "lucide-react"
-import { Spotify, Strava } from "@/components/shared/Icons"
+import { Spotify, Strava, Goodreads } from "@/components/shared/Icons"
 import { Button } from "@/components/ui/button"
+import { TerminalWindow } from "@/components/about/TerminalWindow"
 
 const interestIcons = {
-    Book,
+    Goodreads,
     Spotify,
     Strava
 }
@@ -22,80 +23,82 @@ export function About() {
                 <img src="/images/hero_visual.png" alt="" className="object-contain w-full h-full" />
             </div>
             <div className="container mx-auto px-4 relative z-10">
-                <div className="flex flex-col lg:flex-row gap-12 items-center">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="flex flex-col items-center text-center mb-16"
+                >
+                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-primary mb-6 py-1">
+                        About Me
+                    </h2>
+                    <Button variant="outline" className="border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)]/10">
+                        <Download className="mr-2 h-4 w-4" />
+                        Download Resume
+                    </Button>
+                </motion.div>
 
-                    {/* Left Column: Bio & Stats */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    {/* Left Column: Terminal */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="w-full lg:w-1/2 space-y-8"
+                        className="w-full"
                     >
-                        <div>
-                            <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary)] to-cyan-400 mb-6">
-                                About Me
-                            </h2>
-                            <div className="text-lg text-gray-300 leading-relaxed space-y-4">
-                                <p>{about.professionalBio}</p>
-                            </div>
-                        </div>
-
-                        <div className="grid grid-cols-3 gap-4">
-                            {about.stats.map((stat, idx) => (
-                                <div key={idx} className="glass-card p-4 rounded-xl text-center">
-                                    <h4 className="text-2xl font-bold text-[var(--primary)] mb-1">{stat.value}</h4>
-                                    <p className="text-xs text-gray-400 uppercase tracking-wider">{stat.label}</p>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className="flex gap-4">
-                            <Button variant="outline" className="border-[var(--primary)] text-[var(--primary)] hover:bg-[var(--primary)]/10">
-                                <Download className="mr-2 h-4 w-4" />
-                                Download Resume
-                            </Button>
-                        </div>
+                        <TerminalWindow />
                     </motion.div>
 
-                    {/* Right Column: Interests & Personal */}
+                    {/* Right Column: Interests */}
                     <motion.div
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="w-full lg:w-1/2"
+                        className="w-full h-full"
                     >
-                        <div className="glass-card p-8 rounded-2xl border border-white/5 relative">
-                            <div className="absolute top-0 right-0 p-8 opacity-20">
-                                {/* Abstract decoration could go here */}
-                            </div>
+                        <div className="bg-[hsl(var(--about-card))] p-8 rounded-2xl border border-border relative shadow-sm h-full flex flex-col">
+                            <h3 className="text-2xl font-bold text-[hsl(var(--about-text))] mb-8 flex items-center gap-2">
+                                <span className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
+                                    <Book size={18} />
+                                </span>
+                                Personal Interests
+                            </h3>
 
-                            <h3 className="text-2xl font-bold text-white mb-6">Personal Interests</h3>
-
-                            <div className="space-y-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow">
                                 {about.personalInterests.map((interest, idx) => {
                                     const Icon = interestIcons[interest.icon as keyof typeof interestIcons] || Book
                                     return (
-                                        <a
+                                        <motion.a
                                             key={idx}
                                             href={interest.link}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex items-start gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors group"
+                                            whileHover={{ y: -5 }}
+                                            className="flex flex-col p-5 rounded-xl bg-background/50 border border-border hover:border-primary/50 hover:bg-primary/5 transition-all group relative overflow-hidden"
                                         >
-                                            <div className="p-3 bg-[var(--primary)]/10 rounded-lg text-[var(--primary)] group-hover:scale-110 transition-transform">
-                                                <Icon size={24} />
+                                            <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 blur-2xl rounded-full -mr-12 -mt-12 group-hover:bg-primary/10 transition-colors" />
+
+                                            <div className="p-3 bg-primary/10 rounded-lg text-primary w-fit mb-4 group-hover:scale-110 transition-transform relative z-10">
+                                                <Icon size={20} />
                                             </div>
-                                            <div>
-                                                <h4 className="text-lg font-semibold text-white group-hover:text-[var(--primary)] transition-colors">
+
+                                            <div className="relative z-10">
+                                                <h4 className="text-lg font-semibold text-[hsl(var(--about-text))] group-hover:text-primary transition-colors mb-1">
                                                     {interest.title}
                                                 </h4>
-                                                <p className="text-sm text-gray-400">{interest.description}</p>
+                                                <p className="text-sm text-muted-foreground line-clamp-2">{interest.description}</p>
                                             </div>
-                                        </a>
+                                        </motion.a>
                                     )
                                 })}
+
+                                {/* Decorative "More" card */}
+                                <div className="border border-dashed border-border rounded-xl p-5 flex items-center justify-center text-muted-foreground/50 italic text-sm">
+                                    Exploring more daily...
+                                </div>
                             </div>
                         </div>
                     </motion.div>

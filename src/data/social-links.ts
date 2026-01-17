@@ -32,7 +32,7 @@ export const socialLinks: SocialLink[] = [
     {
         name: "Goodreads",
         url: "https://www.goodreads.com/user/show/175064061",
-        icon: "Book",
+        icon: "Goodreads",
         color: "#553B08",
         category: "personal"
     },

@@ -25,19 +25,19 @@ export function TimelineCard({ experience, index }: TimelineCardProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="order-1 w-5/12 px-6 py-4 glass-card rounded-lg shadow-xl"
+                className="order-1 w-5/12 px-6 py-4 bg-[hsl(var(--timeline-card))] border border-border rounded-lg shadow-xl"
             >
                 <div className="mb-3">
                     <span className="text-sm font-bold text-[var(--primary)]">{experience.period}</span>
-                    <span className="mx-2 text-gray-500">|</span>
-                    <span className="text-sm text-gray-400">{experience.location}</span>
+                    <span className="mx-2 text-muted-foreground">|</span>
+                    <span className="text-sm text-muted-foreground">{experience.location}</span>
                 </div>
-                <h3 className="mb-1 font-bold text-white text-xl">{experience.title}</h3>
-                <h4 className="mb-3 text-lg text-gray-300 font-semibold">{experience.company}</h4>
+                <h3 className="mb-1 font-bold text-foreground text-xl">{experience.title}</h3>
+                <h4 className="mb-3 text-lg text-muted-foreground font-semibold">{experience.company}</h4>
 
                 <ul className="list-disc pl-4 space-y-1 mb-4">
                     {experience.highlights.map((highlight, idx) => (
-                        <li key={idx} className="text-gray-400 text-sm">{highlight}</li>
+                        <li key={idx} className="text-muted-foreground text-sm">{highlight}</li>
                     ))}
                 </ul>
 

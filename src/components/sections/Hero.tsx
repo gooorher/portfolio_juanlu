@@ -1,43 +1,30 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useRef } from "react"
 import Link from "next/link"
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react"
-import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react"
+import { motion } from "motion/react"
+import { ArrowRight, Mail } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { MetricCounter } from "@/components/animations/MetricCounter"
 import { NeuralNetwork } from "@/components/animations/NeuralNetwork"
+import { Typewriter } from "@/components/animations/Typewriter"
+import { GradientMesh } from "@/components/hero/GradientMesh"
+import { ParticleSystem } from "@/components/hero/ParticleSystem"
 
 import { cn } from "@/lib/utils"
 
 export function Hero() {
     const containerRef = useRef<HTMLDivElement>(null)
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-    // Mouse gradient effect
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const { clientX, clientY } = e
-        const { left, top } = e.currentTarget.getBoundingClientRect()
-        setMousePosition({ x: clientX - left, y: clientY - top })
-    }
 
     return (
         <section
             ref={containerRef}
-            onMouseMove={handleMouseMove}
             className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16"
         >
-            {/* Animated Background Gradient */}
-            <div
-                className="pointer-events-none absolute inset-0 transition-opacity duration-500"
-                style={{
-                    background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(10, 132, 255, 0.08), transparent 40%)`
-                }}
-            />
-
-            {/* Decorative Grid */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+            {/* New Animated Backgrounds */}
+            <GradientMesh />
+            <ParticleSystem />
 
             <div className="container relative z-10 grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
                 {/* Text Content */}
@@ -75,25 +62,25 @@ export function Hero() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
-                        className="grid grid-cols-3 gap-8 w-full max-w-md my-6"
+                        className="grid grid-cols-3 gap-4 w-full max-w-lg my-6"
                     >
-                        <div className="text-center md:text-left">
-                            <div className="text-3xl font-bold text-foreground">
+                        <div className="text-center p-4 glass-card rounded-xl flex flex-col items-center justify-center min-h-[110px]">
+                            <div className="text-3xl font-bold text-[hsl(var(--foreground))]">
                                 <MetricCounter value={95} suffix="%" />
                             </div>
-                            <div className="text-sm text-muted-foreground">Satisfaction</div>
+                            <div className="text-xs sm:text-sm text-muted-foreground mt-2 font-medium">Satisfaction</div>
                         </div>
-                        <div className="text-center md:text-left">
-                            <div className="text-3xl font-bold text-foreground">
-                                <MetricCounter value={1000} suffix="+" prefix="" />
+                        <div className="text-center p-4 glass-card rounded-xl flex flex-col items-center justify-center min-h-[110px]">
+                            <div className="text-3xl font-bold text-[hsl(var(--foreground))]">
+                                <MetricCounter value={5} suffix="" prefix="" />
                             </div>
-                            <div className="text-sm text-muted-foreground">API Requests</div>
+                            <div className="text-xs sm:text-sm text-muted-foreground mt-2 font-medium leading-tight">Projects Delivered</div>
                         </div>
-                        <div className="text-center md:text-left">
-                            <div className="text-3xl font-bold text-foreground">
-                                <span className="inline-block">L3</span>
+                        <div className="text-center p-4 glass-card rounded-xl flex flex-col items-center justify-center min-h-[110px]">
+                            <div className="text-3xl font-bold text-[hsl(var(--foreground))]">
+                                <MetricCounter value={2} suffix="+" prefix="" />
                             </div>
-                            <div className="text-sm text-muted-foreground">Support Level</div>
+                            <div className="text-xs sm:text-sm text-muted-foreground mt-2 font-medium leading-tight">Years Experience</div>
                         </div>
                     </motion.div>
 
@@ -114,7 +101,6 @@ export function Hero() {
                                 Contact Me <Mail className="w-4 h-4" />
                             </Link>
                         </Button>
-
                     </motion.div>
                 </div>
 
@@ -126,7 +112,7 @@ export function Hero() {
                     className="relative hidden lg:flex items-center justify-center p-8 h-[500px]"
                 >
                     {/* 3D/Neural network graphic */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-accent/10 rounded-full blur-3xl animate-pulse" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-blue-400/20 rounded-full blur-3xl animate-pulse" />
                     <NeuralNetwork />
 
                     {/* Floating Elements Animation */}
@@ -136,35 +122,6 @@ export function Hero() {
                 </motion.div>
             </div>
         </section>
-    )
-}
-
-function Typewriter({ text }: { text: string }) {
-    const [displayedText, setDisplayedText] = useState("")
-
-    useEffect(() => {
-        let i = 0
-        const timer = setInterval(() => {
-            if (i < text.length) {
-                setDisplayedText((prev) => prev + text.charAt(i))
-                i++
-            } else {
-                clearInterval(timer)
-            }
-        }, 50)
-        return () => clearInterval(timer)
-    }, [text])
-
-    return (
-        <span className="text-xl md:text-2xl font-mono text-primary">
-            {displayedText}
-            <motion.span
-                animate={{ opacity: [0, 1, 0] }}
-                transition={{ repeat: Infinity, duration: 0.8 }}
-            >
-                |
-            </motion.span>
-        </span>
     )
 }
 

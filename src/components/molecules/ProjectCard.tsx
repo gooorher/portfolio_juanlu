@@ -7,38 +7,47 @@ import { ArrowRight, CheckCircle2 } from "lucide-react"
 
 import { Project } from "@/types"
 import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
+import { ImageReveal } from "@/components/projects/ImageReveal"
 
 interface ProjectCardProps {
     project: Project
     index?: number
+    className?: string
 }
 
-export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
+export function ProjectCard({ project, index = 0, className }: ProjectCardProps) {
     return (
         <motion.div
+            layout
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            className="group relative flex flex-col h-full overflow-hidden rounded-2xl border bg-card hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-md"
+            transition={{ delay: index * 0.05 }}
+            className={cn(
+                "group relative flex flex-col h-full overflow-hidden rounded-2xl border bg-card hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-md",
+                className
+            )}
         >
             {/* Image Section */}
             <div className="relative w-full aspect-video overflow-hidden bg-muted/50">
-                {project.image?.thumbnail ? (
-                    <Image
-                        src={project.image.thumbnail}
-                        alt={project.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                ) : (
-                    <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/20 text-6xl font-bold">
-                        {project.title.charAt(0)}
-                    </div>
-                )}
+                <ImageReveal className="h-full">
+                    {project.image?.thumbnail ? (
+                        <Image
+                            src={project.image.thumbnail}
+                            alt={project.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                    ) : (
+                        <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/20 text-6xl font-bold bg-muted/30">
+                            {project.title.charAt(0)}
+                        </div>
+                    )}
+                </ImageReveal>
 
                 {/* Status Badge */}
-                <div className="absolute top-3 right-3">
+                <div className="absolute top-3 right-3 z-10">
                     <Badge variant="secondary" className="backdrop-blur-md bg-background/80 border-primary/20 text-xs font-medium flex items-center gap-1">
                         <CheckCircle2 className="h-3 w-3 text-primary" />
                         Case Study
@@ -75,7 +84,7 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
                 <div className="mt-auto pt-4 border-t border-border/50 flex items-center justify-between">
                     <div className="flex items-center gap-3 text-xs text-muted-foreground font-medium">
                         {project.metrics[0] && (
-                            <span>{project.metrics[0].value} {project.metrics[0].label.split(' ')[0]}</span> // e.g., "95% Accuracy"
+                            <span>{project.metrics[0].value} {project.metrics[0].label.split(' ')[0]}</span>
                         )}
                     </div>
 

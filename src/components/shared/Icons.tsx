@@ -31,3 +31,19 @@ export function Strava({ size = 20, className = "" }: { size?: number, className
         </svg>
     )
 }
+
+export function Goodreads({ size = 20, className = "" }: { size?: number, className?: string }) {
+    return (
+        <svg
+            role="img"
+            viewBox="0 0 24 24"
+            width={size}
+            height={size}
+            fill="currentColor"
+            className={className}
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path d="M17.69 12.77c-1.04 1.65-2.78 2.73-4.75 2.73-3.18 0-5.75-2.8-5.75-6.25s2.57-6.25 5.75-6.25c1.97 0 3.71 1.08 4.75 2.73V3h1.01v12.25c0 5.46-3.46 5.75-6.5 5.75-2.5 0-3.95-1.69-4.37-4h1.01c.36 1.75 1.4 3 3.36 3 2.22 0 5.5-.05 5.5-4.75V15.25L17.69 12.77zM12.94 4c-2.62 0-4.75 2.35-4.75 5.25s2.13 5.25 4.75 5.25 4.75-2.35 4.75-5.25S15.56 4 12.94 4z" />
+        </svg>
+    )
+}

@@ -21,7 +21,7 @@
   --color-chart-3: var(--chart-3);
   --color-chart-2: var(--chart-2);
   --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
+  --color-ring: hsl(var(--ring));
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
@@ -32,7 +32,7 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
+  --color-primary: hsl(var(--primary));
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -55,8 +55,8 @@
   --card-foreground: #1A1A1F;
   --popover: #FFFFFF;
   --popover-foreground: #1A1A1F;
-  --primary: #0A84FF;
-  /* Electric Blue */
+  --primary: 210 100% 52%;
+  /* #0A84FF equivalent in HSL: 210, 100%, 52% */
   --primary-foreground: #FFFFFF;
   --secondary: #F5F5F7;
   --secondary-foreground: #1A1A1F;
@@ -70,7 +70,7 @@
   --destructive-foreground: #FFFFFF;
   --border: #E5E5E5;
   --input: #E5E5E5;
-  --ring: #0A84FF;
+  --ring: 210 100% 52%;
 
   /* Charts - Keeping default for now */
   --chart-1: #0A84FF;
@@ -87,48 +87,63 @@
   --sidebar-accent-foreground: #1A1A1F;
   --sidebar-border: #E5E5E5;
   --sidebar-ring: #0A84FF;
+
+  /* Section Specific - Light Mode */
+  --about-background: 0 0% 98%;
+  --about-card: 0 0% 100%;
+  --about-text: 224 71.4% 4.1%;
+  /* Equivalent to standard text-foreground in HSL */
+  --timeline-background: 210 40% 98%;
+  --timeline-card: 0 0% 100%;
+  --timeline-border: 214.3 31.8% 91.4%;
+  --primary-hover-bg: rgba(10, 132, 255, 0.1);
 }
 
 .dark {
-  /* Dark Mode Colors */
-  --background: #0A0A0F;
-  /* Deep Black */
+  /* Dark Mode Colors - Deeper Black Theme */
+  --background: #000000;
   --foreground: #E5E5E7;
-  --card: #121217;
+  --card: #0A0A0E;
   --card-foreground: #E5E5E7;
-  --popover: #121217;
+  --popover: #0A0A0E;
   --popover-foreground: #E5E5E7;
-  --primary: #00D9B1;
-  /* Neon Teal */
-  --primary-foreground: #0A0A0F;
-  --secondary: #1C1C21;
+  --primary: 169 100% 43%;
+  --primary-foreground: #000000;
+  --secondary: #0D0D12;
   --secondary-foreground: #E5E5E7;
-  --muted: #1C1C21;
-  --muted-foreground: #A1A1AA;
-  /* Neutral 400 equivalent */
+  --muted: #0D0D12;
+  --muted-foreground: #8A8A93;
   --accent: #FF8C42;
-  /* Bright Orange */
-  --accent-foreground: #0A0A0F;
+  --accent-foreground: #000000;
   --destructive: #7F1D1D;
   --destructive-foreground: #E5E5E7;
-  --border: #27272A;
-  --input: #27272A;
-  --ring: #00D9B1;
+  --border: #16161C;
+  --input: #16161C;
+  --ring: 169 100% 43%;
 
   --chart-1: #00D9B1;
   --chart-2: #FF8C42;
   --chart-3: #E5E5E7;
-  --chart-4: #1C1C21;
-  --chart-5: #0A0A0F;
+  --chart-4: #0D0D12;
+  --chart-5: #000000;
 
-  --sidebar: #0A0A0F;
+  --sidebar: #000000;
   --sidebar-foreground: #E5E5E7;
   --sidebar-primary: #00D9B1;
-  --sidebar-primary-foreground: #0A0A0F;
-  --sidebar-accent: #1C1C21;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #0D0D12;
   --sidebar-accent-foreground: #E5E5E7;
-  --sidebar-border: #27272A;
+  --sidebar-border: #16161C;
   --sidebar-ring: #00D9B1;
+
+  /* Section Specific - Dark Mode */
+  --about-background: 240 10% 2%;
+  --about-card: 240 10% 4%;
+  --about-text: 210 40% 98%;
+  --timeline-background: 240 10% 2%;
+  --timeline-card: 240 10% 4%;
+  --timeline-border: 240 10% 8%;
+  --primary-hover-bg: rgba(255, 255, 255, 0.1);
 }
 
 @layer base {
@@ -151,5 +166,18 @@
     background: rgba(10, 10, 15, 0.3);
     /* Slightly darker for dark mode */
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

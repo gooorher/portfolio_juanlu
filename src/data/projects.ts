@@ -77,9 +77,9 @@ export const projects: Project[] = [
         role: "AI Engineer",
         company: "Universidad de Málaga (Thesis)",
         period: "2024 - 2025",
-        description: "Large-scale NLP engine processing 4M+ records for sentiment analysis",
+        description: "Large-scale NLP engine with MongoDB processing 4M+ records for sentiment analysis",
         longDescription: "Developed end-to-end NLP pipeline for analyzing Ukrainian crisis tweets. Built Flask API with MongoDB for storing and querying 4M+ processed records. Implemented custom NLP models for entity extraction and sentiment classification.",
-        tags: ["Python", "Flask", "MongoDB", "NLTK", "Transformers", "Docker"],
+        tags: ["MongoDB", "Python", "Flask", "NLTK", "Transformers", "Docker"],
         image: {
             thumbnail: "/images/nlp.png",
             hero: "/images/nlp.png"

@@ -6,7 +6,7 @@ export const about = {
 
     personalInterests: [
         {
-            icon: "Book",
+            icon: "Goodreads",
             title: "Reading",
             description: "Currently exploring AI ethics and distributed systems",
             link: "https://www.goodreads.com/user/show/175064061"

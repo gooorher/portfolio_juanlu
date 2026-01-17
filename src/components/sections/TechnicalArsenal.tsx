@@ -1,9 +1,11 @@
 "use client"
 
+import { useState } from "react"
 import { motion } from "motion/react"
 import { Cpu, Terminal, Activity, Cloud, Users, CheckCircle2 } from "lucide-react"
 import { competencies, integrations } from "@/data/technical-arsenal"
 import { cn } from "@/lib/utils"
+import { SkillTree } from "@/components/skills/SkillTree"
 
 // Ported from Skills.tsx
 const skillCategories = [
@@ -75,6 +77,8 @@ const skillCategories = [
 ]
 
 export function TechnicalArsenal() {
+    const [viewMode, setViewMode] = useState<"grid" | "graph">("grid")
+
     return (
         <section id="skills" className="py-24 relative overflow-hidden bg-background">
             {/* Background elements */}
@@ -85,47 +89,79 @@ export function TechnicalArsenal() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="flex flex-col items-start gap-4 mb-16"
                 >
-                    <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-                        Technical Arsenal
-                    </h2>
-                    <p className="text-lg text-muted-foreground max-w-[700px]">
+                    <div className="flex justify-between items-center mb-8">
+                        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+                            Technical Arsenal
+                        </h2>
+                        <div className="flex bg-muted/50 p-1 rounded-lg">
+                            <button
+                                onClick={() => setViewMode("grid")}
+                                className={cn(
+                                    "px-4 py-2 text-sm font-medium rounded-md transition-all",
+                                    viewMode === "grid" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
+                                )}
+                            >
+                                Grid
+                            </button>
+                            <button
+                                onClick={() => setViewMode("graph")}
+                                className={cn(
+                                    "px-4 py-2 text-sm font-medium rounded-md transition-all",
+                                    viewMode === "graph" ? "bg-background shadow-sm text-foreground" : "text-muted-foreground hover:text-foreground"
+                                )}
+                            >
+                                Graph
+                            </button>
+                        </div>
+                    </div>
+
+                    <p className="text-lg text-muted-foreground max-w-[700px] mb-16">
                         A comprehensive stack built for deploying and supporting production AI systems at scale.
                     </p>
                 </motion.div>
 
-                {/* PRIMARY SKILLS GRID */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
-                    {skillCategories.map((category, idx) => {
-                        const Icon = category.icon
-                        return (
-                            <motion.div
-                                key={category.title}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: idx * 0.1 }}
-                                className="group relative overflow-hidden rounded-2xl border bg-card p-6 hovered-card transition-colors"
-                            >
-                                <div className="flex items-center gap-4 mb-6">
-                                    <div className="p-3 bg-primary/10 rounded-xl text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                                        <Icon size={24} />
+                {/* PRIMARY SKILLS */}
+                {viewMode === "graph" ? (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="mb-24"
+                    >
+                        <SkillTree />
+                    </motion.div>
+                ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
+                        {skillCategories.map((category, idx) => {
+                            const Icon = category.icon
+                            return (
+                                <motion.div
+                                    key={category.title}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: idx * 0.1 }}
+                                    className="group relative overflow-hidden rounded-2xl border bg-card p-6 hovered-card transition-colors"
+                                >
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <div className="p-3 bg-primary/10 rounded-xl text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                                            <Icon size={24} />
+                                        </div>
+                                        <h3 className="font-bold text-lg">{category.title}</h3>
                                     </div>
-                                    <h3 className="font-bold text-lg">{category.title}</h3>
-                                </div>
-                                <ul className="space-y-3">
-                                    {category.skills.map(skill => (
-                                        <li key={skill} className="flex items-start gap-2 text-sm text-muted-foreground">
-                                            <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary/50" />
-                                            <span>{skill}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </motion.div>
-                        )
-                    })}
-                </div>
+                                    <ul className="space-y-3">
+                                        {category.skills.map(skill => (
+                                            <li key={skill} className="flex items-start gap-2 text-sm text-muted-foreground">
+                                                <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary/50" />
+                                                <span>{skill}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </motion.div>
+                            )
+                        })}
+                    </div>
+                )}
 
                 {/* TOOL PROFICIENCY */}
                 <div className="mb-24">
