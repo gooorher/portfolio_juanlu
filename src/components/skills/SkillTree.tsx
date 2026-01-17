@@ -141,18 +141,18 @@ export function SkillTree() {
 
         simulation.on("tick", () => {
             link
-                .attr("x1", d => (d.source as Node).x!)
-                .attr("y1", d => (d.source as Node).y!)
-                .attr("x2", d => (d.target as Node).x!)
-                .attr("y2", d => (d.target as Node).y!)
+                .attr("x1", (d: any) => (d.source as Node).x!)
+                .attr("y1", (d: any) => (d.source as Node).y!)
+                .attr("x2", (d: any) => (d.target as Node).x!)
+                .attr("y2", (d: any) => (d.target as Node).y!)
 
             node
-                .attr("cx", d => d.x!)
-                .attr("cy", d => d.y!)
+                .attr("cx", (d: any) => d.x!)
+                .attr("cy", (d: any) => d.y!)
 
             labels
-                .attr("x", d => d.x!)
-                .attr("y", d => d.y!)
+                .attr("x", (d: any) => d.x!)
+                .attr("y", (d: any) => d.y!)
         })
 
         function dragstarted(event: any) {
