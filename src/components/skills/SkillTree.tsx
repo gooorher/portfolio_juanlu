@@ -120,10 +120,10 @@ export function SkillTree() {
             .attr("r", (d: any) => d.radius)
             .attr("fill", (d: any) => colorScale(String(d.group)))
             .attr("cursor", "grab")
-            .call(d3.drag<SVGCircleElement, Node>()
+            .call(d3.drag()
                 .on("start", dragstarted)
                 .on("drag", dragged)
-                .on("end", dragended))
+                .on("end", dragended) as any)
 
         const labels = svg.append("g")
             .attr("class", "labels")

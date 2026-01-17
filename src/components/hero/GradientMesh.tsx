@@ -27,7 +27,7 @@ export const GradientMesh: React.FC<GradientMeshProps> = ({
 }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const { theme } = useTheme()
-    const animationRef = useRef<number | undefined>(undefined)
+    const animationRef = useRef<number | null>(null)
 
     // Use a ref to track current theme colors to avoid re-creating the loop on theme change
     // causing jitters, although re-creation is safer for consistency.
