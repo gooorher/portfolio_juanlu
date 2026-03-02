@@ -16,19 +16,19 @@ const commands: Command[] = [
     },
     {
         input: "cat role.conf",
-        output: "AI Product Support Engineer L3"
+        output: "Data Engineer / Backend Developer"
     },
     {
         input: "ls skills/",
-        output: "Python  LLMs  RAG  FastAPI  Kubernetes  AWS  Docker"
+        output: "Java  Python  SQL  Oracle  FastAPI  AWS  Docker  MDM"
     },
     {
         input: "cat location.txt",
-        output: "Málaga, Spain (Ready for Global Support)"
+        output: "Madrid, Spain (Native from Málaga)"
     },
     {
         input: "uptime",
-        output: "Up since 1996 | High availability for complex systems"
+        output: "Up since Feb 23, 2000 | High availability for complex systems"
     },
     {
         input: "ls interests/",
@@ -36,7 +36,7 @@ const commands: Command[] = [
     },
     {
         input: "./current_status.sh",
-        output: <span className="text-green-400">● Systems Online | Available for new challenges</span>
+        output: <span className="text-green-400">● Systems Online | Building Financial Data Infrastructure</span>
     }
 ]
 
